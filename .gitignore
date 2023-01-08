@@ -1,0 +1,24 @@
+*.ldf
+*.mdf
+# Compiled assemblies
+bin/
+
+# Intermediate build files
+obj/
+
+# User-specific project files
+*.user
+
+# Solution user options
+*.suo
+
+# Visual Studio
+*.vs/
+
+**/packages/
+
+*.ini
+
+
+/App_Data/Academy.mdf
+/App_Data/Academy_log.ldf
