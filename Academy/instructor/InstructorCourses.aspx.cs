@@ -11,6 +11,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Web.UI.HtmlControls;
 using System.IO;
 using System.Configuration;
+using System.Data.SqlTypes;
 
 namespace Academy
 {
@@ -118,9 +119,8 @@ namespace Academy
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand(query, con);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                cmd.ExecuteNonQuery();
+                SqlDataAdapter sda = new SqlDataAdapter(query, con);
+                sda.SelectCommand.Parameters.AddWithValue("@iid", instructorId);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -142,6 +142,8 @@ namespace Academy
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+
                 Console.WriteLine("Something went wrong.");
             }
         }
@@ -317,6 +319,9 @@ namespace Academy
                         ddList.DataValueField = "CourseCatId";
                         ddList.DataBind();
                         string selectedCategory = DataBinder.Eval(e.Row.DataItem, "Category").ToString();
+                        System.Diagnostics.Debug.WriteLine("all good................", selectedCategory);
+                        
+
                         ddList.Items.FindByValue(selectedCategory).Selected = true;
                     }
                     catch (Exception ex)
@@ -389,8 +394,8 @@ namespace Academy
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand(query,con);
-                cmd.Parameters.AddWithValue("@cid",course_id);
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cid", course_id);
                 cmd.Parameters.AddWithValue("@title", txtContentTitle.Text);
                 cmd.Parameters.AddWithValue("@text", txtCContent.Text);
                 cmd.Parameters.AddWithValue("@image", imgPath);
