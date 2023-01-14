@@ -16,7 +16,7 @@ namespace Academy
     {
         string connectionString = WebConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
 
-        public string getSpecificData(string id, string query, string column)
+        public string getSpecificData(string searchBy, string query, string column)
         {
             string result = "";
 
@@ -25,7 +25,7 @@ namespace Academy
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@id", searchBy);
                 SqlDataReader sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -90,6 +90,13 @@ namespace Academy
 
         }
 
+        public string getDate()
+        {
+            var dateTime = DateTime.Now;
+            var dateTimeVal = dateTime.ToString("yyyy/MM/dd");
+            return dateTimeVal;
+        }
+
 
         // takes query and use it to retrieve/insert data from db
         public SqlDataReader DbAction(string query, SqlParameter[] param)
@@ -123,7 +130,6 @@ namespace Academy
                     return null;
                 }
 
-                //return cmd.ExecuteReader();
             }
             catch(Exception ex) { 
                 Console.WriteLine(ex.Message); 

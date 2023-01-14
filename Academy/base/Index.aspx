@@ -8,7 +8,7 @@
         <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
             <h1>Learning Today,<br>
                 Leading Tomorrow</h1>
-            <h2>We are team of talented designers making websites with Bootstrap</h2>
+            <h2>Connecting Networks To Learn and Grow</h2>
             <a href="courses.html" class="btn-get-started">Get Started</a>
         </div>
     </section>
@@ -25,10 +25,9 @@
                         <img src="assets/img/about.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                        <h3> Looking for your desired course?</h3>
                         <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+                            Academy gives access to learn courses of your interest with your time flexibility and comfort.
                         </p>
                         <ul>
                             <li><i class="bi bi-check-circle"></i>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
