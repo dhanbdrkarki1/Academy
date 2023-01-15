@@ -69,9 +69,9 @@
   <ItemGroup>
     <Content Include="academy-cmd.sql" />
     <Content Include="AddCourse.aspx" />
-    <Content Include="App_Data\Academy.mdf" />
-    <Content Include="App_Data\Academy_log.ldf">
-      <DependentUpon>Academy.mdf</DependentUpon>
+    <Content Include="App_Data\AcademyDB.mdf" />
+    <Content Include="App_Data\AcademyDB_log.ldf">
+      <DependentUpon>AcademyDB.mdf</DependentUpon>
     </Content>
     <Content Include="assets\css\Custom.css" />
     <Content Include="assets\css\login.css" />
