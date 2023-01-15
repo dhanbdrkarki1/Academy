@@ -37,7 +37,7 @@ namespace Academy
 
         protected void Session_End(object sender, EventArgs e)
         {
-            Response.Redirect("~/Login.aspx");
+            
         }
 
         protected void Application_End(object sender, EventArgs e)

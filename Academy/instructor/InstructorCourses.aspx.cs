@@ -11,6 +11,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Web.UI.HtmlControls;
 using System.IO;
 using System.Configuration;
+using System.Data.SqlTypes;
 
 namespace Academy
 {
@@ -20,82 +21,118 @@ namespace Academy
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             listDropDownCategory();
+
             populateGridView();
         }
 
 
         // get instructor id from db
-        int getInstructorId()
+        string getInstructorId()
         {
-            int instructorId = -1;
+
+            Utils uObj = new Utils();
 
             string username = "";
+
             if (Session["username"] != null)
             {
                 username = Session["username"].ToString();
             }
+            string insQ = "select AccountId from UserAccount where username = @id";
+            string instructorId = uObj.getSpecificData(username, insQ, "AccountId");
+            System.Diagnostics.Debug.WriteLine("Instructor id................", instructorId);
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand("select AccountId from UserAccount where username='" + username + "'", connection);
-                command.Parameters.AddWithValue("@username", username);
-
-                connection.Open();
-                SqlDataReader sdr = command.ExecuteReader();
-
-                if (sdr.Read())
-                {
-                    return instructorId = sdr.GetInt32(0);
-                }
-            }
-            return 0;
+            return instructorId;
         }
 
-        string getUsername()
+        //string getUsername()
+        //{
+        //    string username = "";
+        //    if (Session["username"] != null)
+        //    {
+        //        username = Session["username"].ToString();
+        //        return username;
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+        //    return null;
+        //}
+
+        // bind all types of category from database
+        void listDropDownCategory()
         {
-            string username = "";
-            if (Session["username"] != null)
+            String query = "select * from CourseCategory";
+            SqlConnection con = new SqlConnection(connectionString);
+            try
             {
-                username = Session["username"].ToString();
-                return username;
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.CommandType = CommandType.Text;
+
+
+                ddCategory.DataSource = cmd.ExecuteReader();
+                ddCategory.DataTextField = "Category";
+                ddCategory.DataValueField = "CourseCatId";
+                ddCategory.DataBind();
+
+
             }
-            else
+            catch (Exception ex)
             {
-                Response.Redirect("~/Login.aspx");
+                Console.WriteLine("Something went wrong.");
             }
-            return null;
         }
 
 
         //add courses in db
         protected void btnAddCourse(object sender, EventArgs e)
         {
-            int instructorId = getInstructorId();
-            var dateTime = DateTime.Now;
-            var dateTimeVal = dateTime.ToString("yyyy/MM/dd");
+
+            string instructorId = getInstructorId();
+            Utils uObj = new Utils();
+            var dateTimeVal = uObj.getDate();
             String query = "insert into Courses(Title,Category,OverView,Rate,CreatedAt, InstructorId) values(@title,@category,@overview,@rate,@createdAt,@id)";
-            SqlConnection con = new SqlConnection(connectionString);
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@title", txtCourseTitle.Text);
-                cmd.Parameters.AddWithValue("@category", ddCategory.SelectedValue);
-                cmd.Parameters.AddWithValue("@overview", txtOverView.Text);
-                cmd.Parameters.AddWithValue("@rate", txtRate.Text);
-                cmd.Parameters.AddWithValue("@createdAt", dateTimeVal);
-                cmd.Parameters.AddWithValue("@id", instructorId);
-                cmd.ExecuteNonQuery();
-                ClearField();
-                populateGridView();
-                lblSuccess.Text = "New course added.";
-            }
-            catch (Exception ex)
-            {
-                lblError.Text = ex.Message;
-            }
+
+            System.Diagnostics.Debug.WriteLine("Add course: " + ddCategory.SelectedValue);
+
+
+            SqlParameter title = new SqlParameter("@title", SqlDbType.VarChar);
+            title.Value = txtCourseTitle.Text;
+
+            SqlParameter category = new SqlParameter("@category", SqlDbType.Int);
+            category.Value = Convert.ToInt32(ddCategory.SelectedIndex+1);
+
+            SqlParameter overview = new SqlParameter("@overview", SqlDbType.VarChar);
+            overview.Value = txtOverView.Text;
+
+            SqlParameter rate = new SqlParameter("@rate", SqlDbType.Int);
+            rate.Value = Convert.ToInt32(txtRate.Text);
+
+            SqlParameter createdAt = new SqlParameter("@createdAt", SqlDbType.Date);
+            createdAt.Value = dateTimeVal;
+
+            SqlParameter id = new SqlParameter("@id", SqlDbType.Int);
+            id.Value = Convert.ToInt32(instructorId);
+
+            SqlParameter[] parameters = { title, category, overview, rate, createdAt, id };
+
+            // insert data into db
+            //if(uObj.DbAction(query, parameters) != null)
+            //{
+            //    ClearField();
+            //    populateGridView();
+            //    lblSuccess.Text = "New course added.";
+            //}
+            //else
+            //{
+            //    lblError.Text = "Error found...";
+
+            //}
+
         }
 
         //clears field
@@ -107,20 +144,19 @@ namespace Academy
         // populate all the data from db in gridview
         void populateGridView()
         {
-            int instructorId = getInstructorId();
+            string instructorId = getInstructorId();
             string query = "select c.CourseId, c.Title, cc.Category, c.OverView, c.Rate, c.CreatedAt from Courses c join CourseCategory cc on c.Category = cc.CourseCatId where c.InstructorId='" + instructorId + "'";
 
             //String query = "select Courses.Title, CourseCategory.Category, Courses.OverView, Courses.Rate, Courses.CreatedAt from Courses inner join CourseCategory on Courses.Category=CourseCategory.CourseCatId where Courses.InstructorId='" + instructorId + "' ";
             //string query = "select Courses.Title, CourseCategory.Category, Courses.OverView, Courses.Rate, Courses.CreatedAt from Courses inner join CourseCategory on Courses.Category=CourseCategory.CourseCatId where Courses.InstructorId=1";
-            string query1 = "select * from Courses where InstructorId='" + instructorId + "' ";
+            string query1 = "select * from Courses where InstructorId='" + Convert.ToInt32(instructorId) + "' ";
             SqlConnection con = new SqlConnection(connectionString);
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand(query, con);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                cmd.ExecuteNonQuery();
+                SqlDataAdapter sda = new SqlDataAdapter(query, con);
+                sda.SelectCommand.Parameters.AddWithValue("@iid", instructorId);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -142,9 +178,14 @@ namespace Academy
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+
                 Console.WriteLine("Something went wrong.");
             }
         }
+
+
+
 
         // triggers when edit btn is pressed
         protected void gvManageCourse_RowEditing(object sender, GridViewEditEventArgs e)
@@ -268,30 +309,7 @@ namespace Academy
         }
 
 
-        // bind all types of category from database
-        void listDropDownCategory()
-        {
-            String query = "select * from CourseCategory";
-            SqlConnection con = new SqlConnection(connectionString);
-            try
-            {
 
-                con.Open();
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.CommandType = CommandType.Text;
-
-                ddCategory.DataSource = cmd.ExecuteReader();
-                ddCategory.DataTextField = "Category";
-                ddCategory.DataValueField = "CourseCatId";
-                ddCategory.DataBind();
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Something went wrong.");
-            }
-        }
 
         // bind all types of categories from database into gridview of edittemplate
         protected void gvManageCourse_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -317,6 +335,9 @@ namespace Academy
                         ddList.DataValueField = "CourseCatId";
                         ddList.DataBind();
                         string selectedCategory = DataBinder.Eval(e.Row.DataItem, "Category").ToString();
+                        System.Diagnostics.Debug.WriteLine("all good................", selectedCategory);
+                        
+
                         ddList.Items.FindByValue(selectedCategory).Selected = true;
                     }
                     catch (Exception ex)
@@ -389,8 +410,8 @@ namespace Academy
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand(query,con);
-                cmd.Parameters.AddWithValue("@cid",course_id);
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cid", course_id);
                 cmd.Parameters.AddWithValue("@title", txtContentTitle.Text);
                 cmd.Parameters.AddWithValue("@text", txtCContent.Text);
                 cmd.Parameters.AddWithValue("@image", imgPath);
