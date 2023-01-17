@@ -11,6 +11,13 @@ create table UserAccount(
 	Profile_Img varchar(400)
 )
 
+--insert into UserAccount values('Dhan Bdr Karki','dhan.karki@gmail.com','dhan','Instructor','P@ssword0','')
+--insert into UserAccount values('Ashish Tuladhar','ashish.tuladhar@gmail.com','ashish','Student','P@ssword0','')
+--insert into UserAccount values('Sagar Thakuri','sagar.thakuri@gmail.com','sagar','Admin','P@ssword0','')
+--insert into UserAccount values('Srijana Tanukar','srijana.tandukar@gmail.com','srijana','Student','P@ssword0','')
+--insert into UserAccount values('Ankita Giri','ankita.giri@gmail.com','ankita','Instructor','P@ssword0','')
+
+
 create table CourseCategory(
 	CourseCatId int primary key identity(1,1),
 	Category varchar(250) not null unique,
@@ -32,8 +39,8 @@ create table Courses(
 	InstructorId int not null references UserAccount(AccountId),
 )
 
--- insert into Courses values('Java Programming: Solving Problems with Software',1,'Learn to code in Java and improve your programming and problem-solving skills', 10,'2022-02-03')
--- insert into Courses Values('Interactivity with JavaScript', 1, 'This is the third course in the Web Design For Everybody specialization.  A basic understanding of HTML and CSS is expected when you enroll in this class.    Additional courses focus on enhancing the styling with responsive design and completing a capstone project.', 15, '2022-04-05')
+ --insert into Courses values('Java Programming: Solving Problems with Software',1,'Learn to code in Java and improve your programming and problem-solving skills', 10,'2022-02-03')
+ --insert into Courses Values('Interactivity with JavaScript', 1, 'This is the third course in the Web Design For Everybody specialization.  A basic understanding of HTML and CSS is expected when you enroll in this class.    Additional courses focus on enhancing the styling with responsive design and completing a capstone project.', 15, '2022-04-05')
 
 
 -- select CourseID, Courses.Title, CourseCategory.Category, OverView, Rate, CratedAt  from Courses inner join CourseCategory on Courses.Category = CourseCategory.CourseCatId 

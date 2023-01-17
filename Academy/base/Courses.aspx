@@ -60,7 +60,7 @@
                             string imgpath = data[5].ToString();
                             if (imgpath == "")
                             {
-                                imgpath = "~/Images/Profile/user.png";
+                                imgpath = "~/Images/Content/no-image-icon.png";
                             }
                             imgpath = Page.ResolveUrl(imgpath);
                             string instructor = data[6].ToString();
@@ -74,7 +74,7 @@
                                     <h4><%= category %></h4>
                                     <p class="price">$<%= rate %></p>
                                 </div>
-                                <h3><a href="course-details.html"><%= title %></a></h3>
+                                <h3><a href="#"><%= title %></a></h3>
                                 <p><%= limitText %></p>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">

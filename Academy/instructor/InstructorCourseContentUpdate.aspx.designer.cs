@@ -15,13 +15,22 @@ namespace Academy
     {
 
         /// <summary>
-        /// txtCTitle control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCTitle;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
+        /// hiddenContentId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hiddenContentId;
 
         /// <summary>
         /// txtContentTitle control.
@@ -69,15 +78,6 @@ namespace Academy
         protected global::System.Web.UI.WebControls.FileUpload ftFile;
 
         /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
-
-        /// <summary>
         /// btnClose control.
         /// </summary>
         /// <remarks>
@@ -87,12 +87,12 @@ namespace Academy
         protected global::System.Web.UI.WebControls.Button btnClose;
 
         /// <summary>
-        /// testId control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testId;
+        protected global::System.Web.UI.WebControls.Button btnSave;
     }
 }

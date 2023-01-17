@@ -52,7 +52,7 @@ namespace Academy
                 string imgpath = data[5].ToString();
                 if (imgpath == "")
                 {
-                    imgpath = "~/Images/Profile/user.png";
+                    imgpath = "~/Images/Content/no-image-icon.png";
                 }
                 imgpath = Page.ResolveUrl(imgpath);
                 string instructor = data[6].ToString();

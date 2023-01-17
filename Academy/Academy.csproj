@@ -144,7 +144,6 @@
     <Content Include="assets\vendor\swiper\swiper-bundle.min.js" />
     <Content Include="base\Checkout.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Images\Profile\Ashish.JPG" />
     <Content Include="Images\Profile\user.png" />
     <Content Include="base\Login.aspx" />
     <Content Include="base\SignUp.aspx" />

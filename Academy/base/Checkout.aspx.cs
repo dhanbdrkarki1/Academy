@@ -106,7 +106,20 @@ namespace Academy.@base
 
             System.Diagnostics.Debug.WriteLine("all good................");
             // insert data into db
-            uObj.DbAction(query, parameters);
+            if(uObj.DbAction(query, parameters) != null)
+            {
+                string accountQuery = "select * from UserAccount where AccountId=@id";
+
+                string accType = uObj.getSpecificData(stuId, accountQuery, "AccountType");
+                if(accType == "Student")
+                {
+                    Response.Redirect("../student/Student.aspx");
+                }
+                else
+                {
+                    Response.Redirect("~/Index.aspx");
+                }
+            }
 
 
 

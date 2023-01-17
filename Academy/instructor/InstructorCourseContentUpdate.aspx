@@ -27,6 +27,8 @@
     </main>
 
 
+    <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true"></asp:ScriptManager>
+
     <div class="container">
         <div class="row mt-5">
             <div class="col-3">
@@ -40,107 +42,53 @@
                             string contentTitle = (string)data[2];
 
                     %>
+                    <asp:HiddenField ID="hiddenContentId" runat="server" ClientIDMode="Static" />
                     <a class="nav-link <%= index == 0 ? "active" : "" %>" id="v-pills-<%= contentId %>-tab" data-toggle="pill" href="#v-pills-<%= contentId %>" role="tab" aria-controls="v-pills-<%= contentId %>" aria-selected="<%= index == 0 ? "true" : "false" %>" onclick="SetViewState('<%= contentId %>')">
                         <%= contentTitle %>
                     </a>
-                    <%--<asp:LinkButton ID="linkButton1" runat="server" CssClass="nav-link" Text='<%= contentTitle %>' CommandArgument='<%= contentId %>' CommandName='<%= index %>'></asp:LinkButton>--%>
+
 
                     <%
                             index++;
                         }
                     %>
-
-
                 </div>
             </div>
 
 
-            <asp:ScriptManager runat="server" />
-            <h3><%= ViewState["contentId"] %></h3>
             <div class="col-9">
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show <%= ViewState["contentId"] == null ? "active" : "" %>" id="v-pills-<%= ViewState["contentId"] %>" role="tabpanel" aria-labelledby="v-pills-<%= ViewState["contentId"] %>-tab">
-                        <!-- update form -->
-                        <div class="form-group">
-                            <asp:Label runat="server" for="txtInput" Text="Course Title"></asp:Label>
-                            <asp:TextBox ID="txtCTitle" class="form-control" runat="server" Text=""></asp:TextBox>
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
-                            <asp:TextBox ID="txtContentTitle" class="form-control" Text="" runat="server"></asp:TextBox>
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Content Text:"></asp:Label>
-                            <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Image:"></asp:Label>
-                            <asp:FileUpload ID="ftImage" class="form-control" runat="server" />
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Content Url:"></asp:Label>
-                            <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url"></asp:TextBox>
-
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
-                            <asp:FileUpload ID="ftFile" class="form-control" runat="server" />
-                        </div>
-
-                        <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Update" />
-                        <asp:Button ID="btnClose" class="btn btn-secondary" runat="server" Text="Clear" />
-
-
-                    </div>
-                </div>
-            </div>
-
-            <asp:Label ID="testId" runat="server" Text="Label"></asp:Label>
-
-
-
-
-
-            <%--            <div class="col-9">
                 <div class="tab-content" id="v-pills-tabContent">
                     <%
                         index = 0;
                         foreach (object[] data in contentData)
                         {
                             int contentId = (int)data[0];
-                            int cid = (int)data[1];
                             string contTitle = (string)data[2];
-                            string contText = (string)data[3];
-                            string contImage = (string)data[4];
-                            string contFile = (string)data[5];
-                            string contUrl = (string)data[6];
                     %>
-                    <div class="tab-pane fade show <%= (string)ViewState["viewstate"] == contentId.ToString() ? "active" : "" %>" id="v-pills-<%= contentId %>" role="tabpanel" aria-labelledby="v-pills-<%= contentId %>-tab">
+                    <div class="tab-pane fade show <%= (string)ViewState["viewstate"] == contentId.ToString() || (string)ViewState["hiddenContentId"] == contentId.ToString() ? "active" : "" %>" id="v-pills-<%= contentId %>" role="tabpanel" aria-labelledby="v-pills-<%= contentId %>-tab">
+
                         <!-- update form -->
-                        <div class="form-group">
-                            <asp:Label runat="server" for="txtInput" Text="Course Title"></asp:Label>
-                            <asp:TextBox ID="txtCTitle" class="form-control" runat="server" Text=""></asp:TextBox>
-                        </div>
+                        <label><%= contTitle %></label>
                         <div class="form-group">
                             <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
-                            <asp:TextBox ID="txtContentTitle" class="form-control" runat="server" Text='<%# Eval("contTitle") %>'></asp:TextBox>
+                            <asp:TextBox ID="txtContentTitle" class="form-control" runat="server" ClientIDMode="Static"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <asp:Label runat="server" Text="Content Text:"></asp:Label>
-                            <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <asp:Label runat="server" Text="Image:"></asp:Label>
-                            <asp:FileUpload ID="ftImage" class="form-control" runat="server" />
+                            <asp:FileUpload ID="ftImage" class="form-control" runat="server" ClientIDMode="Static" />
                         </div>
                         <div class="form-group">
                             <asp:Label runat="server" Text="Content Url:"></asp:Label>
-                            <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url"></asp:TextBox>
+                            <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url" ClientIDMode="Static"></asp:TextBox>
 
                         </div>
                         <div class="form-group">
                             <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
-                            <asp:FileUpload ID="ftFile" class="form-control" runat="server" />
+                            <asp:FileUpload ID="ftFile" class="form-control" runat="server" ClientIDMode="Static" />
                         </div>
 
                         <asp:Button ID="btnClose" class="btn btn-secondary" runat="server" Text="Clear" />
@@ -153,28 +101,36 @@
                         }
                     %>
                 </div>
-            </div>--%>
+            </div>
         </div>
     </div>
 
-    <%--    <%
-        List<object[]> dataList = (List<object[]>)ViewState["ContentData"];
-        for (int i = 0; i < dataList.Count; i++)
-        {
-    %>
-    <div>
-        ID: <%= dataList[i][0] %>
-            Cont Title: <%= dataList[i][1] %>
-    </div>
-    <%
-        }
-    %>--%>
-
     <script>
-        function SetViewState(arg) {
-            __doPostBack('', arg);
+        function SetViewState(contentId) {
+            console.log(typeof (contentId));
+            var hiddenContentId = document.getElementById("hiddenContentId");
+            hiddenContentId.setAttribute("value", contentId);
+
+
+            //__doPostBack('hiddenContentId', contentId);
+
+            //console.log(document.getElementById("hiddenContentId").value);
+<%--            var cData = <%= new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewState["ContentData"]) %>;
+            
+
+            for (var i = 0; i < cData.length; i++) {
+                if (cData[i][0] == contentId) {
+                    console.log(contentId);
+                    // fill the form fields with the values from the content data
+                    document.getElementById("txtContentTitle").value = cData[i][2];
+                    document.getElementById("txtCContent").value = cData[i][3];
+                    document.getElementById("txtUrl").value = cData[i][5];
+                    break;
+                }
+            }--%>
         }
     </script>
+
 
 
 </asp:Content>

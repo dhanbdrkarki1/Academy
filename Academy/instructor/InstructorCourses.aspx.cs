@@ -21,9 +21,11 @@ namespace Academy
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            listDropDownCategory();
-
-            populateGridView();
+            if (!IsPostBack)
+            {
+                listDropDownCategory();
+                populateGridView();
+            }
         }
 
 
@@ -46,20 +48,6 @@ namespace Academy
             return instructorId;
         }
 
-        //string getUsername()
-        //{
-        //    string username = "";
-        //    if (Session["username"] != null)
-        //    {
-        //        username = Session["username"].ToString();
-        //        return username;
-        //    }
-        //    else
-        //    {
-        //        Response.Redirect("~/Login.aspx");
-        //    }
-        //    return null;
-        //}
 
         // bind all types of category from database
         void listDropDownCategory()
@@ -68,18 +56,14 @@ namespace Academy
             SqlConnection con = new SqlConnection(connectionString);
             try
             {
-
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandType = CommandType.Text;
-
 
                 ddCategory.DataSource = cmd.ExecuteReader();
                 ddCategory.DataTextField = "Category";
                 ddCategory.DataValueField = "CourseCatId";
                 ddCategory.DataBind();
-
-
             }
             catch (Exception ex)
             {
@@ -121,18 +105,17 @@ namespace Academy
             SqlParameter[] parameters = { title, category, overview, rate, createdAt, id };
 
             // insert data into db
-            //if(uObj.DbAction(query, parameters) != null)
-            //{
-            //    ClearField();
-            //    populateGridView();
-            //    lblSuccess.Text = "New course added.";
-            //}
-            //else
-            //{
-            //    lblError.Text = "Error found...";
+            if (uObj.DbAction(query, parameters) != null)
+            {
+                ClearField();
+                populateGridView();
+                lblSuccess.Text = "New course added.";
+            }
+            else
+            {
+                lblError.Text = "Error found...";
 
-            //}
-
+            }
         }
 
         //clears field
@@ -149,7 +132,7 @@ namespace Academy
 
             //String query = "select Courses.Title, CourseCategory.Category, Courses.OverView, Courses.Rate, Courses.CreatedAt from Courses inner join CourseCategory on Courses.Category=CourseCategory.CourseCatId where Courses.InstructorId='" + instructorId + "' ";
             //string query = "select Courses.Title, CourseCategory.Category, Courses.OverView, Courses.Rate, Courses.CreatedAt from Courses inner join CourseCategory on Courses.Category=CourseCategory.CourseCatId where Courses.InstructorId=1";
-            string query1 = "select * from Courses where InstructorId='" + Convert.ToInt32(instructorId) + "' ";
+            //string query1 = "select * from Courses where InstructorId='" + Convert.ToInt32(instructorId) + "' ";
             SqlConnection con = new SqlConnection(connectionString);
 
             try
@@ -204,18 +187,20 @@ namespace Academy
         }
 
 
-        //row updating
+
+        //triggers on clicking update btn and update value in database
         protected void gvManageCourse_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             // Get the updated values for the row being edited
             int courseId = Convert.ToInt32(gvManageCourse.DataKeys[e.RowIndex].Value);
             string title = (gvManageCourse.Rows[e.RowIndex].FindControl("txtTitle") as TextBox).Text;
             string overview = (gvManageCourse.Rows[e.RowIndex].FindControl("txtOverView") as TextBox).Text;
-            decimal rate = Convert.ToDecimal((gvManageCourse.Rows[e.RowIndex].FindControl("txtRate") as TextBox).Text);
+            int rate = Convert.ToInt32((gvManageCourse.Rows[e.RowIndex].FindControl("txtRate") as TextBox).Text);
             DateTime createdAt = Convert.ToDateTime((gvManageCourse.Rows[e.RowIndex].FindControl("txtCreatedAt") as TextBox).Text);
-            string category = (gvManageCourse.Rows[e.RowIndex].FindControl("ddlCat") as DropDownList).SelectedValue;
+            string category = (gvManageCourse.Rows[e.RowIndex].FindControl("ddlCat") as DropDownList).SelectedItem.Value;
+            System.Diagnostics.Debug.WriteLine("all good:-------" + category + "rate: " + rate.ToString());
 
-            // Update the database with the updated values
+            // Update the database with the updated values"
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
@@ -231,6 +216,8 @@ namespace Academy
                     cmd.Parameters.AddWithValue("@CourseId", courseId);
                     cmd.ExecuteNonQuery();
                 }
+                con.Close();
+                //Response.Redirect(Request.Url.AbsoluteUri);
             }
 
             // Cancel the edit mode for the row
@@ -240,53 +227,6 @@ namespace Academy
             populateGridView();
         }
 
-
-        //triggers on clicking update btn and update value in database
-        //protected void gvManageCourse_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        //{
-
-        //    String query = "update Courses set Title=@Title, OverView=@OverView, Rate=@Rate, CreatedAt=@CreatedAt, Category=@Category where CourseId=1";
-        //    SqlConnection con = new SqlConnection(connectionString);
-        //    try
-        //    {
-        //        con.Open();
-        //        SqlCommand cmd = new SqlCommand(query, con);
-        //        string s = (gvManageCourse.DataKeys[e.RowIndex].Value.ToString()) + "<br>" +
-        //            (gvManageCourse.Rows[e.RowIndex].FindControl("txtTitle") as TextBox).Text.Trim() + "<br>" +
-        //            (gvManageCourse.Rows[e.RowIndex].FindControl("ddlCat") as DropDownList).SelectedValue + "<br>" +
-        //            (gvManageCourse.Rows[e.RowIndex].FindControl("txtOverView") as TextBox).Text.Trim() + "<br>" +
-        //            (gvManageCourse.Rows[e.RowIndex].FindControl("txtRate") as TextBox).Text.Trim() + "<br>" +
-        //            (gvManageCourse.Rows[e.RowIndex].FindControl("txtCreatedAt") as TextBox).Text.Trim();
-
-
-
-
-        //        cmd.Parameters.AddWithValue("@CourseId", (gvManageCourse.DataKeys[e.RowIndex].Value.ToString()));
-        //        cmd.Parameters.AddWithValue("@Title", (gvManageCourse.Rows[e.RowIndex].FindControl("txtTitle") as TextBox).Text.Trim());
-        //        cmd.Parameters.AddWithValue("@Category", (gvManageCourse.Rows[e.RowIndex].FindControl("ddlCat") as DropDownList).SelectedValue);
-        //        cmd.Parameters.AddWithValue("@OverView", (gvManageCourse.Rows[e.RowIndex].FindControl("txtOverView") as TextBox).Text.Trim());
-        //        cmd.Parameters.AddWithValue("@Rate", 100); // (gvManageCourse.Rows[e.RowIndex].FindControl("txtRate") as TextBox).Text.Trim());
-        //        cmd.Parameters.AddWithValue("@CreatedAt", (gvManageCourse.Rows[e.RowIndex].FindControl("txtCreatedAt") as TextBox).Text.Trim());
-
-        //        int i = cmd.ExecuteNonQuery();
-        //        lblSuccess.Text = s + "<br> Rows affected = " + i;
-        //        if (i > 0)
-        //        {
-        //            Response.Write("<script>alert('Rows affected');</script>");
-
-        //        }
-        //        // cancel the edit operation
-        //        gvManageCourse.EditIndex = -1;
-        //        con.Close();
-        //        // Rebind the GridView to the data source
-        //        populateGridView();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lblError.Text = ex.Message;
-        //    }
-
-        //}
 
         // delete item from db
         protected void gvManageCourse_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -307,9 +247,6 @@ namespace Academy
                 lblError.Text = ex.Message;
             }
         }
-
-
-
 
         // bind all types of categories from database into gridview of edittemplate
         protected void gvManageCourse_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -335,10 +272,9 @@ namespace Academy
                         ddList.DataValueField = "CourseCatId";
                         ddList.DataBind();
                         string selectedCategory = DataBinder.Eval(e.Row.DataItem, "Category").ToString();
-                        System.Diagnostics.Debug.WriteLine("all good................", selectedCategory);
                         
 
-                        ddList.Items.FindByValue(selectedCategory).Selected = true;
+                        ddList.Items.FindByText(selectedCategory).Selected = true;
                     }
                     catch (Exception ex)
                     {
@@ -445,7 +381,7 @@ namespace Academy
 
             //redirecting to update page with id
             int CourseId = Convert.ToInt32(lblCourseId.Text);
-            Response.Redirect(Page.ResolveUrl("~/InstructorCourseContentUpdate.aspx?Cid=" + CourseId));
+            Response.Redirect("../instructor/InstructorCourseContentUpdate.aspx?Cid=" + CourseId);
         }
     }
 }

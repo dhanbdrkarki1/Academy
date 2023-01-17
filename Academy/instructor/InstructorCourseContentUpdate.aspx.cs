@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 using System.Runtime.Remoting.Messaging;
 using System.Reflection.Emit;
 using System.Reflection;
+using System.Web.Script.Serialization;
+using System.Xml.Linq;
 
 namespace Academy
 {
@@ -26,39 +28,65 @@ namespace Academy
 
             }
 
-            if (IsPostBack)
-            {
-                showData();
-            }
 
         }
 
-        void showData()
+
+
+        void fillFormData()
         {
-            int contentId = Convert.ToInt32(Request.Params["__EVENTARGUMENT"]);
-            testId.Text = "Link was clicked with argument: " + contentId;
-            ViewState["contentId"] = contentId;
+            HiddenField hiddenContentId = (HiddenField)FindControl("hiddenContentId");
+            int contentId = Convert.ToInt32(hiddenContentId.Value);
+
+            System.Diagnostics.Debug.WriteLine("hiddenValue..: " + contentId);
+            //ViewState["contentId"] = contentId;
+            Response.Write("Hello you:.......");
             List<object[]> contentData = (List<object[]>)ViewState["ContentData"];
-
-
             foreach (object[] data in contentData)
             {
-                int ccid = (int)data[0];
-                int cid = (int)data[1];
-                string contTitle = (string)data[2];
-                string contText = (string)data[3];
-                string contImage = (string)data[4];
-                string contFile = (string)data[5];
-                string contUrl = (string)data[6];
-                if (contentId == cid)
+                if ((int)data[0] == contentId)
                 {
-                    txtContentTitle.Text = contTitle;
-                    txtCContent.Text= contText;
-
+                    Response.Write("<script>alert('hello world');</script>");
+                    txtContentTitle.Text = (string)data[2];
+                    txtCContent.Text = (string)data[3];
+                    txtUrl.Text = (string)data[5];
+                    break;
                 }
 
             }
         }
+
+
+
+
+        //[System.Web.Services.WebMethod]
+        //public static void SetViewState(int contentId, string cData)
+        //{
+        //    List<object[]> contentData = new JavaScriptSerializer().Deserialize<List<object[]>>(cData);
+        //    System.Diagnostics.Debug.WriteLine("hiddenValue..: " + contentId);
+        //    foreach (object[] data in contentData)
+        //    {
+        //        if ((int)data[0] == contentId)
+        //        {
+        //            string contentTitle = (string)data[2];
+        //            string contentText = (string)data[3];
+        //            string contentUrl = (string)data[5];
+        //            Page page = HttpContext.Current.CurrentHandler as Page;
+
+        //            TextBox txtContentTitle = (TextBox)page.FindControl("txtContentTitle");
+        //            TextBox txtCContent = (TextBox)page.FindControl("txtCContent");
+        //            TextBox txtUrl = (TextBox)page.FindControl("txtUrl");
+        //            // Set the value of the textbox controls
+        //            txtContentTitle.Text = contentTitle;
+        //            txtCContent.Text = contentText;
+        //            txtUrl.Text = contentUrl;
+        //            break;
+
+        //        }
+
+        //    }
+
+        //}
         void retrieveContentData()
         {
             // get course id from url
@@ -90,7 +118,6 @@ namespace Academy
                 }
                 sdr.Close();
                 ViewState["ContentData"] = dataList;
-                ViewState["msg"] = "hello fuck you";
             }
             catch (Exception ex)
             {
