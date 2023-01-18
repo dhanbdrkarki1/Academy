@@ -11,6 +11,14 @@
             $(this).tab('show')
         });
 
+
+        window.onload = function (e) {
+            var hiddenContentId = document.getElementById("hiddenContentId");
+            hiddenContentId.setAttribute("value", 1);
+            console.log(document.getElementById("hiddenContentId").value);
+
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -106,8 +114,11 @@
     </div>
 
     <script>
+
+
+
         function SetViewState(contentId) {
-            console.log(typeof (contentId));
+            console.log(contentId);
             var hiddenContentId = document.getElementById("hiddenContentId");
             hiddenContentId.setAttribute("value", contentId);
 

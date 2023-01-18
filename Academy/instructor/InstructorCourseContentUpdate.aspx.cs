@@ -25,7 +25,14 @@ namespace Academy
             {
                 // retrieve content data from the database and store it in the ViewState
                 retrieveContentData();
+                
 
+            }
+            else
+            {
+                string contentId = Request.Params["__EVENTARGUMENT"];
+                System.Diagnostics.Debug.WriteLine("cccccid..: " + contentId);
+                fillFormData(contentId);
             }
 
 
@@ -33,20 +40,20 @@ namespace Academy
 
 
 
-        void fillFormData()
+        void fillFormData(string contId)
         {
-            HiddenField hiddenContentId = (HiddenField)FindControl("hiddenContentId");
-            int contentId = Convert.ToInt32(hiddenContentId.Value);
+            int contentId = Convert.ToInt32(contId);
 
-            System.Diagnostics.Debug.WriteLine("hiddenValue..: " + contentId);
+            System.Diagnostics.Debug.WriteLine("formdata..: " + contentId);
             //ViewState["contentId"] = contentId;
-            Response.Write("Hello you:.......");
+            
             List<object[]> contentData = (List<object[]>)ViewState["ContentData"];
             foreach (object[] data in contentData)
             {
-                if ((int)data[0] == contentId)
+                if (Convert.ToInt16( data[0]) == contentId)
+                
                 {
-                    Response.Write("<script>alert('hello world');</script>");
+                    System.Diagnostics.Debug.WriteLine("if..: " + contentId);
                     txtContentTitle.Text = (string)data[2];
                     txtCContent.Text = (string)data[3];
                     txtUrl.Text = (string)data[5];
