@@ -7,8 +7,8 @@
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs" data-aos="fade-in">
             <div class="container">
-                <h2>About Us</h2>
-                <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+                <h2><b> About Us </b></h2>
+                <p> <h4> Trusted by hundreds of students, companies, Academy provides you what you need. </h4></p>
             </div>
         </div>
         <!-- End Breadcrumbs -->
@@ -22,18 +22,21 @@
                         <img src="assets/img/about.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                        <h2> <b> EXPLORE WITH US </b></h2>
                         <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+                         <h5>  Academy is a global networking platform that allows you to get access to learn your interested subject and enhance skills and get to represent yourself on global market.</h5> 
                         </p>
+                        <p> <h2> WE PROVIDE ... </h2></p>
                         <ul>
-                            <li><i class="bi bi-check-circle"></i>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                            <li><i class="bi bi-check-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                            <li><i class="bi bi-check-circle"></i>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                            <li><i class="bi bi-check-circle"></i> Training from experts and professional certificate once you complete course.</li>
+                            <li><i class="bi bi-check-circle"></i> You can also join as trainers to share your knowledge and experiences.</li>
+                            <li><i class="bi bi-check-circle"></i> Learn at your pace, time flexibility and accessbility.</li>
+                            <li><i class="bi bi-check-circle"></i> Rewards are also given by the end of the courses. </li>
                         </ul>
                         <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                            <h1> <b> UNLOCK YOUR SKILLS <br />
+                                <br />
+                                GET A STEP CLOSER TO YOUR DREAM JOB </b> </h1> 
                         </p>
 
                     </div>
@@ -95,7 +98,7 @@
                                     <h4>Ceo &amp; Founder</h4>
                                     <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                                       It was an amazing experience to be the part of marketting classes. Got to interact with many similar field people. I recommend everyone to join course of their interest. Explore.
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                     </p>
                                 </div>
@@ -111,7 +114,7 @@
                                     <h4>Designer</h4>
                                     <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                                        Being able to express myself more with the design I make. Sharing it to the world and getting positive feedbacks has inspired me. The course was really informative and interactive.
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                     </p>
                                 </div>
@@ -127,7 +130,7 @@
                                     <h4>Store Owner</h4>
                                     <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                                        Thanks to Academy, I was able to study the topic of my interest without having to leave my store. This has encouraged me to take more classes in Academy.
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                     </p>
                                 </div>
@@ -143,7 +146,7 @@
                                     <h4>Freelancer</h4>
                                     <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                                       Understanding the work ethics of free lancing and being encouraged to start my own business has helped me coome a long way. Thank you Academy for such opportunities. Looking forward. 
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                     </p>
                                 </div>
@@ -159,7 +162,7 @@
                                     <h4>Entrepreneur</h4>
                                     <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                                        A great platform to stay competitive in the digital transformation of the workplace by offering  relevant, personalized on-demand learning content powered by a dynamic content marketplace.
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                     </p>
                                 </div>

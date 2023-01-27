@@ -8,8 +8,8 @@
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
             <div class="container">
-                <h2>Trainers</h2>
-                <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+                <h2><b>Trainers</b></h2>
+                <p> <h4> Trainers from around the globe teach students here in Academy. Get to know them better. </h4></p>
             </div>
         </div>
         <!-- End Breadcrumbs -->
@@ -26,7 +26,7 @@
                                 <h4>Walter White</h4>
                                 <span>Web Development</span>
                                 <p>
-                                    Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
+                                    Come along to learn the basics of web development. Learn website development using programming languages such as HTML, CSS and JavaScript and many more advanced courses.
                                 </p>
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter"></i></a>
@@ -45,7 +45,7 @@
                                 <h4>Sarah Jhinson</h4>
                                 <span>Marketing</span>
                                 <p>
-                                    Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
+                                    Get started with the knowledge of marketing and business along with management strategy and stepwise funalitionalities. Get into this competitive market and mark your place.
                                 </p>
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter"></i></a>
@@ -64,7 +64,7 @@
                                 <h4>William Anderson</h4>
                                 <span>Content</span>
                                 <p>
-                                    Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
+                                    Boost your writing skills by joining the content-related courses. Learn to deliver the information to the users to get their attention and their interet.
                                 </p>
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter"></i></a>

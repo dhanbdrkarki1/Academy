@@ -64,16 +64,16 @@
                     <div class="row">
 
                         <div class="col-lg-3 col-md-6 footer-contact">
-                            <h3>Mentor</h3>
+                            <h2 style="color:mediumaquamarine; font-weight:bold">Academy</h2>
                             <p>
-                                A108 Adam Street
+                                Maiti Devi Marg
                                 <br>
-                                New York, NY 535022<br>
-                                United States
+                                Kathmandu 44600<br>
+                                Nepal
                                 <br>
                                 <br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                                <strong>Phone: +977 9801259875</strong> <br>
+                                <strong>Email: learnatacademy@gmail.com</strong> <br>
                             </p>
                         </div>
 
@@ -101,7 +101,7 @@
 
                         <div class="col-lg-4 col-md-6 footer-newsletter">
                             <h4>Join Our Newsletter</h4>
-                            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                            <p>Get exciting news and offers from Academy. Subscribe </p>
                             <form action="" method="post">
                                 <input type="email" name="email"><input type="submit" value="Subscribe">
                             </form>
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="container d-md-flex py-4">
+           <div class="container d-md-flex py-4">
 
                 <div class="me-md-auto text-center text-md-start">
                     <div class="copyright">

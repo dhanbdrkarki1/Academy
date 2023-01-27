@@ -8,8 +8,9 @@
         <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
             <h1>Learning Today,<br>
                 Leading Tomorrow</h1>
-            <h2>Connecting Networks To Learn and Grow</h2>
-            <a href="courses.html" class="btn-get-started">Get Started</a>
+            <h2>Global Netwroking Platform To Learn and Grow
+            </h2>
+            <a href="Courses.aspx" class="btn-get-started">Get Started</a>
         </div>
     </section>
     <!-- End Hero -->
@@ -25,17 +26,18 @@
                         <img src="assets/img/about.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                        <h3> Looking for your desired course?</h3>
+                        
                         <p class="fst-italic">
-                            Academy gives access to learn courses of your interest with your time flexibility and comfort.
+                            <h1 style="color:mediumaquamarine; font-weight:bold"> LOOKING FOR YOUR DESIRED COURSE?</h1>
                         </p>
                         <ul>
-                            <li><i class="bi bi-check-circle"></i>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                            <li><i class="bi bi-check-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                            <li><i class="bi bi-check-circle"></i>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                            <h3>
+                            <li><i class="bi bi-check-circle"></i>Learn from Professionals.</li>
+                            <li><i class="bi bi-check-circle"></i>Competitive with people all around the globe.</li>
+                            <li><i class="bi bi-check-circle"></i>Get preofessional certificate of the completed courses.</li> </h3>
                         </ul>
                         <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                           <h4> Start learning the courses according to your time flexibility and your pace. Start today, enroll and obtain all the creative skills you to achieve your goals in terms of personal and career path. Connect to the global community. Expland networks.</h4>
                         </p>
 
                     </div>
@@ -84,10 +86,9 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex align-items-stretch">
                         <div class="content">
-                            <h3>Why Choose Mentor?</h3>
+                            <h3>Why Choose Academy?</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                                Academy believes in building networks to every corner of the globe inspiring everyone to learn the subject of their interest. Explore the topic and develop understanding at your convinent pace.
                             </p>
                             <div class="text-center">
                                 <a href="about.html" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
@@ -100,22 +101,22 @@
                                 <div class="col-xl-4 d-flex align-items-stretch">
                                     <div class="icon-box mt-4 mt-xl-0">
                                         <i class="bx bx-receipt"></i>
-                                        <h4>Corporis voluptates sit</h4>
-                                        <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                                        <h4>Learn from the best</h4>
+                                        <p>Get ideas from mentors expert in that field. Ask your queries and learn new skills.</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 d-flex align-items-stretch">
                                     <div class="icon-box mt-4 mt-xl-0">
                                         <i class="bx bx-cube-alt"></i>
-                                        <h4>Ullamco laboris ladore pan</h4>
-                                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                                        <h4>Come out of your comfort zone</h4>
+                                        <p>Share your ideas and skills with people from all over the world. Build Network.</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 d-flex align-items-stretch">
                                     <div class="icon-box mt-4 mt-xl-0">
                                         <i class="bx bx-images"></i>
-                                        <h4>Labore consequatur</h4>
-                                        <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                                        <h4>See yourself in bigger picture</h4>
+                                        <p> Do not wait for the perfect time. Start today and see yourself in the position of your dreams.</p>
                                     </div>
                                 </div>
                             </div>
@@ -136,73 +137,73 @@
                     <div class="col-lg-3 col-md-4">
                         <div class="icon-box">
                             <i class="ri-store-line" style="color: #ffbb2c;"></i>
-                            <h3><a href="">Lorem Ipsum</a></h3>
+                            <h3><a href="">Marketing and Business</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
                         <div class="icon-box">
                             <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-                            <h3><a href="">Dolor Sitema</a></h3>
+                            <h3><a href="">Data Analysis</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
                         <div class="icon-box">
                             <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-                            <h3><a href="">Sed perspiciatis</a></h3>
+                            <h3><a href=""> Project Management </a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
                         <div class="icon-box">
                             <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-                            <h3><a href="">Magni Dolores</a></h3>
+                            <h3><a href="">UI/UX Design</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-database-2-line" style="color: #47aeff;"></i>
-                            <h3><a href="">Nemo Enim</a></h3>
+                            <h3><a href="">Database Management</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-                            <h3><a href="">Eiusmod Tempor</a></h3>
+                            <h3><a href="">Digital Illustration</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-                            <h3><a href="">Midela Teren</a></h3>
+                            <h3><a href="">Creative Writing</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-                            <h3><a href="">Pira Neve</a></h3>
+                            <h3><a href="">FreeLance and Enterpreneurship </a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-anchor-line" style="color: #b2904f;"></i>
-                            <h3><a href="">Dirada Pack</a></h3>
+                            <h3><a href="">Animation</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-disc-line" style="color: #b20969;"></i>
-                            <h3><a href="">Moton Ideal</a></h3>
+                            <h3><a href="">Music and Recordings</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-base-station-line" style="color: #ff5828;"></i>
-                            <h3><a href="">Verdo Park</a></h3>
+                            <h3><a href="">Network Security</a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4">
                         <div class="icon-box">
                             <i class="ri-fingerprint-line" style="color: #29cc61;"></i>
-                            <h3><a href="">Flavor Nivelanda</a></h3>
+                            <h3><a href="">Robotics</a></h3>
                         </div>
                     </div>
                 </div>
@@ -232,7 +233,7 @@
                                 </div>
 
                                 <h3><a href="course-details.html">Website Design</a></h3>
-                                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                                <p>Learn the creation and maintenance of website from stratch.</p>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">
                                         <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
@@ -259,7 +260,7 @@
                                 </div>
 
                                 <h3><a href="course-details.html">Search Engine Optimization</a></h3>
-                                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                                <p>Learn to provide great user experience including a fast load speed and compelling UX through this course.</p>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">
                                         <img src="assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
@@ -286,7 +287,7 @@
                                 </div>
 
                                 <h3><a href="course-details.html">Copywriting</a></h3>
-                                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                                <p>Explore the types of writing and learn to write content for advertisement to arouse interest of audience.</p>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">
                                         <img src="assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
@@ -309,7 +310,7 @@
         </section>
         <!-- End Popular Courses Section -->
 
-        <!-- ======= Trainers Section ======= -->
+        <!-- ======= Trainers Section ======= 
         <section id="trainers" class="trainers">
             <div class="container" data-aos="fade-up">
 
@@ -374,7 +375,7 @@
                 </div>
 
             </div>
-        </section>
+        </section>-->
         <!-- End Trainers Section -->
 
     </main>

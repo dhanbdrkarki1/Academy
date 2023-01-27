@@ -11,11 +11,11 @@ create table UserAccount(
 	Profile_Img varchar(400)
 )
 
---insert into UserAccount values('Dhan Bdr Karki','dhan.karki@gmail.com','dhan','Instructor','P@ssword0','')
---insert into UserAccount values('Ashish Tuladhar','ashish.tuladhar@gmail.com','ashish','Student','P@ssword0','')
---insert into UserAccount values('Sagar Thakuri','sagar.thakuri@gmail.com','sagar','Admin','P@ssword0','')
---insert into UserAccount values('Srijana Tanukar','srijana.tandukar@gmail.com','srijana','Student','P@ssword0','')
---insert into UserAccount values('Ankita Giri','ankita.giri@gmail.com','ankita','Instructor','P@ssword0','')
+insert into UserAccount values('Dhan Bdr Karki','dhan.karki@gmail.com','dhan','Instructor','P@ssword0','')
+insert into UserAccount values('Ashish Tuladhar','ashish.tuladhar@gmail.com','ashish','Student','P@ssword0','')
+insert into UserAccount values('Sagar Thakuri','sagar.thakuri@gmail.com','sagar','Admin','P@ssword0','')
+insert into UserAccount values('Srijana Tanukar','srijana.tandukar@gmail.com','srijana','Student','P@ssword0','')
+insert into UserAccount values('Ankita Giri','ankita.giri@gmail.com','ankita','Instructor','P@ssword0','')
 
 
 create table CourseCategory(
