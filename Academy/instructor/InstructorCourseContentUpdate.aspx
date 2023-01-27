@@ -12,16 +12,12 @@
         });
 
 
-        window.onload = function (e) {
-            var hiddenContentId = document.getElementById("hiddenContentId");
-            hiddenContentId.setAttribute("value", 1);
-            console.log(document.getElementById("hiddenContentId").value);
-
-        }
 
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true"></asp:ScriptManager>
+
     <main id="main" data-aos="fade-in">
 
         <!-- ======= Breadcrumbs ======= -->
@@ -35,11 +31,11 @@
     </main>
 
 
-    <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true"></asp:ScriptManager>
+
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-3">
+            <%--            <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <%
                         List<object[]> contentData = (List<object[]>)ViewState["ContentData"];
@@ -51,7 +47,7 @@
 
                     %>
                     <asp:HiddenField ID="hiddenContentId" runat="server" ClientIDMode="Static" />
-                    <a class="nav-link <%= index == 0 ? "active" : "" %>" id="v-pills-<%= contentId %>-tab" data-toggle="pill" href="#v-pills-<%= contentId %>" role="tab" aria-controls="v-pills-<%= contentId %>" aria-selected="<%= index == 0 ? "true" : "false" %>" onclick="SetViewState('<%= contentId %>')">
+                    <a class="nav-link <%= index == 0 ? "active" : "" %>" id="v-pills-<%= contentId %>-tab" data-toggle="pill" href="#v-pills-<%= contentId %>" role="tab" aria-controls="v-pills-<%= contentId %>" aria-selected="<%= index == 0 ? "true" : "false" %>" onclick="SetViewState('<%= contentId %>');return false;">
                         <%= contentTitle %>
                     </a>
 
@@ -61,67 +57,128 @@
                         }
                     %>
                 </div>
-            </div>
+            </div>--%>
 
+            <h3>Hlllo world</h3>
+            <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                <ContentTemplate>
 
-            <div class="col-9">
-                <div class="tab-content" id="v-pills-tabContent">
-                    <%
-                        index = 0;
-                        foreach (object[] data in contentData)
-                        {
-                            int contentId = (int)data[0];
-                            string contTitle = (string)data[2];
-                    %>
-                    <div class="tab-pane fade show <%= (string)ViewState["viewstate"] == contentId.ToString() || (string)ViewState["hiddenContentId"] == contentId.ToString() ? "active" : "" %>" id="v-pills-<%= contentId %>" role="tabpanel" aria-labelledby="v-pills-<%= contentId %>-tab">
+                    <div class="col-3">
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <asp:Repeater ID="repeaterNavLinks" runat="server" OnItemCommand="repeaterNavLinks_ItemCommand">
+                                <ItemTemplate>
 
-                        <!-- update form -->
-                        <label><%= contTitle %></label>
-                        <div class="form-group">
-                            <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
-                            <asp:TextBox ID="txtContentTitle" class="form-control" runat="server" ClientIDMode="Static"></asp:TextBox>
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Content Text:"></asp:Label>
-                            <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Image:"></asp:Label>
-                            <asp:FileUpload ID="ftImage" class="form-control" runat="server" ClientIDMode="Static" />
-                        </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Content Url:"></asp:Label>
-                            <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url" ClientIDMode="Static"></asp:TextBox>
+                                    <asp:LinkButton ID="lnkNavLink" runat="server" CommandName="Update" CommandArgument='<%# Eval("[0]") %>' Text='<%# Eval("[2]") %>' CssClass='nav-link' />
+                                </ItemTemplate>
+                            </asp:Repeater>
 
                         </div>
-                        <div class="form-group">
-                            <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
-                            <asp:FileUpload ID="ftFile" class="form-control" runat="server" ClientIDMode="Static" />
-                        </div>
-
-                        <asp:Button ID="btnClose" class="btn btn-secondary" runat="server" Text="Clear" />
-                        <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Update" />
-
-
                     </div>
-                    <%
-                            index++;
-                        }
-                    %>
-                </div>
-            </div>
+
+
+
+                    <div class="col-9">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <!-- update form -->
+                            <div class="form-group">
+                                <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
+                                <asp:TextBox ID="TextBox1" class="form-control" runat="server" ClientIDMode="Static"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label runat="server" Text="Content Text:"></asp:Label>
+                                <asp:TextBox ID="TextBox2" Rows="7" class="form-control" runat="server" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label runat="server" Text="Image:"></asp:Label>
+                                <asp:FileUpload ID="FileUpload1" class="form-control" runat="server" ClientIDMode="Static" />
+                            </div>
+                            <div class="form-group">
+                                <asp:Label runat="server" Text="Content Url:"></asp:Label>
+                                <asp:TextBox ID="TextBox3" class="form-control" runat="server" TextMode="Url" ClientIDMode="Static"></asp:TextBox>
+
+                            </div>
+                            <div class="form-group">
+                                <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
+                                <asp:FileUpload ID="FileUpload2" class="form-control" runat="server" ClientIDMode="Static" />
+                            </div>
+
+                            <asp:Button ID="Button1" class="btn btn-secondary" runat="server" Text="Clear" />
+                            <asp:Button ID="Button2" class="btn btn-primary" runat="server" Text="Update" />
+                        </div>
+                    </div>
+                </ContentTemplate>
+
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="lnkNavLink" EventName="Command" />
+
+                </Triggers>
+            </asp:UpdatePanel>
+
+
+
+
+            <%--            <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                <ContentTemplate>
+                    <div class="col-9">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <%
+                                index = 0;
+                                foreach (object[] data in contentData)
+                                {
+                                    int contentId = (int)data[0];
+                                    string contTitle = (string)data[2];
+                            %>
+                            <div class="tab-pane fade show <%= (string)ViewState["viewstate"] == contentId.ToString() || (string)ViewState["hiddenContentId"] == contentId.ToString() ? "active" : "" %>" id="v-pills-<%= contentId %>" role="tabpanel" aria-labelledby="v-pills-<%= contentId %>-tab">
+
+                                <!-- update form -->
+                                <div class="form-group">
+                                    <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
+                                    <asp:TextBox ID="txtContentTitle" class="form-control" runat="server" ClientIDMode="Static"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Content Text:"></asp:Label>
+                                    <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Image:"></asp:Label>
+                                    <asp:FileUpload ID="ftImage" class="form-control" runat="server" ClientIDMode="Static" />
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Content Url:"></asp:Label>
+                                    <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url" ClientIDMode="Static"></asp:TextBox>
+
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
+                                    <asp:FileUpload ID="ftFile" class="form-control" runat="server" ClientIDMode="Static" />
+                                </div>
+
+                                <asp:Button ID="btnClose" class="btn btn-secondary" runat="server" Text="Clear" />
+                                <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Update" />
+
+
+                            </div>
+
+                            <%
+                                    index++;
+                                }
+                            %>
+                        </div>
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="v-pills-tab" EventName="click" />
+                </Triggers>
+            </asp:UpdatePanel>--%>
         </div>
     </div>
 
     <script>
 
-
-
         function SetViewState(contentId) {
             console.log(contentId);
             var hiddenContentId = document.getElementById("hiddenContentId");
             hiddenContentId.setAttribute("value", contentId);
-
 
             //__doPostBack('hiddenContentId', contentId);
 
