@@ -69,6 +69,10 @@
   <ItemGroup>
     <Content Include="academy-cmd.sql" />
     <Content Include="AddCourse.aspx" />
+    <Content Include="admin\Profile.aspx" />
+    <Content Include="admin\ViewEnrollment.aspx" />
+    <Content Include="admin\ManageUser.aspx" />
+    <Content Include="admin\AllCourses.aspx" />
     <Content Include="App_Data\AcademyDB.mdf" />
     <Content Include="App_Data\AcademyDB_log.ldf">
       <DependentUpon>AcademyDB.mdf</DependentUpon>
@@ -143,6 +147,7 @@
     <Content Include="assets\vendor\swiper\swiper-bundle.min.css" />
     <Content Include="assets\vendor\swiper\swiper-bundle.min.js" />
     <Content Include="base\Checkout.aspx" />
+    <Content Include="base\InsCourses.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\Profile\user.png" />
     <Content Include="base\Login.aspx" />
@@ -178,6 +183,34 @@
     <Compile Include="admin\AdminPage.Master.designer.cs">
       <DependentUpon>AdminPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="admin\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ViewEnrollment.aspx.cs">
+      <DependentUpon>ViewEnrollment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ViewEnrollment.aspx.designer.cs">
+      <DependentUpon>ViewEnrollment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ManageUser.aspx.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ManageUser.aspx.designer.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AllCourses.aspx.cs">
+      <DependentUpon>AllCourses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AllCourses.aspx.designer.cs">
+      <DependentUpon>AllCourses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="base\Base.Master.cs">
       <DependentUpon>Base.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -191,6 +224,13 @@
     </Compile>
     <Compile Include="base\Checkout.aspx.designer.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="base\InsCourses.aspx.cs">
+      <DependentUpon>InsCourses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="base\InsCourses.aspx.designer.cs">
+      <DependentUpon>InsCourses.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

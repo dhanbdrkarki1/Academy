@@ -1,38 +1,21 @@
-﻿
-<%@ Page Title="Courses" Language="C#" MasterPageFile="Base.Master" AutoEventWireup="true" CodeBehind="Courses.aspx.cs" Inherits="Academy.WebForm2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="Base.Master" AutoEventWireup="true" CodeBehind="InsCourses.aspx.cs" Inherits="Academy.InsCourses" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../assets/css/Custom.css" />
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../assets/js/Custom.js"></script>
-    <style>
-        .course-effect {
-            transition: .3s;
-        }
-
-            .course-effect:hover {
-                box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-                transform: scale(1.01,1.01);
-            }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <main id="main" data-aos="fade-in">
+    <main id="main">
 
         <!-- ======= Breadcrumbs ======= -->
-        <div class="breadcrumbs">
+        <div class="breadcrumbs" data-aos="fade-in">
             <div class="container">
-                <h2><b> Courses </b> </h2>
-                <p> <h4> Learn the in-demand professional skills from the experts. Explore courses and get enrolled today.</h4> </p>
+                <h2><b>Contact Us </b></h2>
+                <p>
+                    <h4>Connect with us and be the first one to get all the exciting offers and courses information. </h4>
+                </p>
             </div>
         </div>
         <!-- End Breadcrumbs -->
+
 
 
         <!-- ======= Courses Section ======= -->
@@ -41,7 +24,7 @@
                 <div class="row mb-4" data-aos="zoom-in" data-aos-delay="100">
 
                     <%
-                        List<object[]> contentData = (List<object[]>)ViewState["CData"];
+                        List<object[]> contentData = (List<object[]>)ViewState["InstructorCourses"];
                         foreach (object[] data in contentData)
                         {
                             string courseid = data[0].ToString();
@@ -65,6 +48,16 @@
                             imgpath = Page.ResolveUrl(imgpath);
                             string instructor = data[6].ToString();
                     %>
+
+                    <% if (ViewState["msg"].ToString() != string.Empty)
+                        {
+                    %>
+
+                    <h3>No Coourses Available!</h3>
+
+                    <% 
+
+                        } %>
 
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-toggle="modal" data-target="#overviewModal" onclick="showCourseOverview(<%= courseid %>)">
                         <div class="course-item course-effect">
@@ -101,52 +94,4 @@
         </section>
         <!-- End Courses Section -->
     </main>
-    <!-- End #main -->
-
-    <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
-
-
-    <!-- Modal -->
-    <asp:ScriptManager runat="server" />
-
-    <div class="modal fade" id="overviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog mw-100 w-50" role="document">
-            <div class="modal-content">
-
-                <div class="modal-header mb-2 bg-info text-white">
-                    <h4 class="modal-title" id="exampleModalLongTitle">
-
-                        <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
-                    </h4>
-                    <p class="btn btn-sm p-3 mb-2 bg-success text-white">Price: $
-                        <asp:Label ID="lblPrice" runat="server" Text=""></asp:Label></p>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="hideModal()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
-                </div>
-                <div class="modal-body">
-                    <asp:Button ID="btnEnrollCourse" class="btn btn-primary btn-lg mb-2 " runat="server" Text="Enroll Now" OnClick="btnEnrollCourse_Click" />
-
-                    <h4 class="mb-2">About this Course</h4>
-                    <p style="font-size: 1rem;" class="text-dark">
-
-                        <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label>
-
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showCourseOverview(arg) {
-            __doPostBack('', arg);
-        }
-        function hideModal() {
-
-            $('#overviewModal').modal('hide')
-        }
-    </script>
 </asp:Content>

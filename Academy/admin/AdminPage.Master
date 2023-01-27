@@ -36,8 +36,9 @@
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="active" href="AdminCourses.aspx">Courses</a></li>
-                        <li><a href="Subscription.aspx">Subscription</a></li>
+                        <li><a class="active" href="AdminCourses.aspx">All Courses</a></li>
+                        <li><a href="ViewEnrollment.aspx">View Enrollment</a></li>
+                        <li><a href="ManageUser.aspx">Manage User</a></li>
                         <li><a href="Profile.aspx">My Profile</a></li>
 
                     </ul>

@@ -17,34 +17,39 @@ namespace Academy
         protected void Page_Load(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("all good................");
-             
+
             if (!IsPostBack)
             {
                 retrieveData();
-                System.Diagnostics.Debug.WriteLine("all good................");
-
+            }
+            else
+            {
+                showInstructorCourses();
             }
         }
 
 
+        void showInstructorCourses()
+        {
+            string accountId = Request.Params["__EVENTARGUMENT"];
+            System.Diagnostics.Debug.WriteLine("all good................" + accountId);
+
+            Response.Redirect("InsCourses.aspx?accountId=" + accountId);
+
+
+        }
+
         void retrieveData()
         {
             string query = "SELECT * FROM UserAccount WHERE AccountType=@it";
-           
-            System.Diagnostics.Debug.WriteLine("all good................");
-
-
             Utils uObj = new Utils();
 
-
-           
             SqlParameter it = new SqlParameter("@it", SqlDbType.Char);
             it.Value = "Instructor";
 
             SqlParameter[] parameters = { it };
 
-            System.Diagnostics.Debug.WriteLine("all good................");
-            
+            // reading instructor type user from db
             SqlDataReader sdr = uObj.DbAction(query, parameters);
 
             // Read the data and store it in the ViewState
@@ -53,18 +58,17 @@ namespace Academy
 
             while (sdr.Read())
             {
-                object[] data = new object[7];
-                data[0] = sdr["FullName"];
-                data[1] = sdr["Email"];
-                data[2] = sdr["Profile_Img"];
-                
-
+                object[] data = new object[5];
+                data[0] = sdr["AccountId"];
+                data[1] = sdr["FullName"];
+                data[2] = sdr["Email"];
+                data[3] = sdr["Profile_Img"];
                 instructorList.Add(data);
             }
+
             sdr.Close();
             ViewState["InstructorData"] = instructorList;
         }
 
     }
-}
 }

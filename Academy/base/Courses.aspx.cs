@@ -25,7 +25,7 @@ namespace Academy
             {
                 retrieveData();
             }
-            if (IsPostBack)
+            else
             {
                 showOverView();
             }
@@ -37,6 +37,8 @@ namespace Academy
         {
             string script = "$(document).ready(function () { $('#overviewModal').modal('show'); });";
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", script, true);
+            
+            
             string courseId = Request.Params["__EVENTARGUMENT"];
             
             List<object[]> courseData = (List<object[]>)ViewState["CData"];
@@ -103,7 +105,7 @@ namespace Academy
                     dataList.Add(data);
                 }
                 sdr.Close();
-                ViewState["CData"] = dataList;
+                ViewState["CourseData"] = dataList;
             }
             catch (Exception ex)
             {

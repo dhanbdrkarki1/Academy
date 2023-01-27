@@ -1,9 +1,11 @@
-﻿<%@ Page Title="View Enrollment" Language="C#" MasterPageFile="InstructorPage.Master" AutoEventWireup="true" CodeBehind="ViewEnrollment.aspx.cs" Inherits="Academy.WebForm7" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/AdminPage.Master" AutoEventWireup="true" CodeBehind="ViewEnrollment.aspx.cs" Inherits="Academy.admin.WebForm2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <main id="main" data-aos="fade-in" class="mt-5">
+        <main id="main" data-aos="fade-in" class="mt-5">
+
+
+
 
         <!-- ======= Courses Section ======= -->
         <section id="courses" class="courses">
