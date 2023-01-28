@@ -18,103 +18,67 @@
                         <thead class="bg-light">
                             <tr>
                                 <th>Name</th>
-                                <th>Title</th>
-                                <th>Status</th>
-                                <th>Position</th>
-                                <th>Actions</th>
+                                <th>Course Title</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Enrolled Date</th>
                             </tr>
                         </thead>
                         <tbody>
+
+
+                            <%
+                                List<object[]> enrollmentData = (List<object[]>)ViewState["EnrollmentData"];
+
+                                foreach (object[] data in enrollmentData)
+                                {
+                                    string fullName = data[0].ToString();
+                                    string email = data[1].ToString();
+                                    string profileImg = data[2].ToString();
+                                    if (profileImg == "")
+                                    {
+                                        profileImg = "~/Images/Profile/user.png";
+                                    }
+                                    profileImg = Page.ResolveUrl(profileImg);
+                                    string title = data[3].ToString();
+                                    string category = data[4].ToString();
+                                    string totalAmt = data[5].ToString();
+                                    string orgEnrollDate = data[6].ToString();
+                                    DateTime date = DateTime.Parse(orgEnrollDate);
+                                    string enrollDate = date.ToString("dd-MMM-yy");
+
+                            %>
+
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <img
-                                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                            src="<%= profileImg %>"
                                             alt=""
                                             style="width: 45px; height: 45px"
                                             class="rounded-circle" />
                                         <div class="ms-3">
-                                            <p class="fw-bold mb-1">John Doe</p>
-                                            <p class="text-muted mb-0">john.doe@gmail.com</p>
+                                            <p class="fw-bold mb-1"><%= fullName %></p>
+                                            <p class="text-muted mb-0"><%= email %></p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="fw-normal mb-1">Software engineer</p>
-                                    <p class="text-muted mb-0">IT department</p>
+                                    <%= title %>
                                 </td>
                                 <td>
-                                    <span class="badge badge-success rounded-pill d-inline">Active</span>
+                                    <%= category %>
                                 </td>
-                                <td>Senior</td>
+                                <td>$<%= totalAmt %></td>
                                 <td>
-                                    <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                        Edit
-                                    </button>
+                                    <%= enrollDate %>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img
-                                            src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                                            class="rounded-circle"
-                                            alt=""
-                                            style="width: 45px; height: 45px" />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1">Alex Ray</p>
-                                            <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">Consultant</p>
-                                    <p class="text-muted mb-0">Finance</p>
-                                </td>
-                                <td>
-                                    <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
-                                </td>
-                                <td>Junior</td>
-                                <td>
-                                    <button
-                                        type="button"
-                                        class="btn btn-link btn-rounded btn-sm fw-bold"
-                                        data-mdb-ripple-color="dark">
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img
-                                            src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                                            class="rounded-circle"
-                                            alt=""
-                                            style="width: 45px; height: 45px" />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1">Kate Hunington</p>
-                                            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">Designer</p>
-                                    <p class="text-muted mb-0">UI/UX</p>
-                                </td>
-                                <td>
-                                    <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-                                </td>
-                                <td>Senior</td>
-                                <td>
-                                    <button
-                                        type="button"
-                                        class="btn btn-link btn-rounded btn-sm fw-bold"
-                                        data-mdb-ripple-color="dark">
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
+
+                            <%
+
+                                }
+                            %>
                         </tbody>
                     </table>
 

@@ -202,8 +202,8 @@ h6 {
   position: relative;
 }
 
-.navbar a,
-.navbar a:focus {
+.navbar li,
+.navbar li:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -223,12 +223,17 @@ h6 {
   margin-left: 5px;
 }
 
-.navbar a:hover,
-.navbar .active,
-.navbar .active:focus,
-.navbar li:hover>a {
+/*.navbar a:hover,
+
+.navbar .active:focus,*/
+.navbar ul li a:hover {
   color: #5fcf80;
 }
+
+
+.navbar ul  li.active {
+        background-color: #aaaaaa;
+    }
 
 .navbar .dropdown ul {
   display: block;

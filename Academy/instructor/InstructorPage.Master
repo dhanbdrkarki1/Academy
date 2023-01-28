@@ -23,6 +23,9 @@
 
     <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -35,19 +38,30 @@
 
                 <h1 class="logo me-auto"><a href="Index.aspx">Academy</a></h1>
 
-                <nav id="navbar" class="navbar order-last order-lg-0">
-                    <ul>
-                        <li><a class="active" href="InstructorCourses.aspx">My Courses</a></li>
-                        <li><a href="ViewEnrollment.aspx">View Enrollment</a></li>
-                        <li><a href="InstructorProfile.aspx">My Profile</a></li>
-                        <li>
-                            <a href="#"><asp:Label ID="lblUser" runat="server" Text=""></asp:Label></a>
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul class="nav">
 
-                        </li>
+                                <li><a class="active" href="InstructorCourses.aspx">My Courses</a></li>
+                                <li><a href="ViewEnrollment.aspx">View Enrollment</a></li>
+                                <li><a href="InstructorProfile.aspx">My Profile</a></li>
+                                <li>
+                                    <a href="#">
+                                        <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></a>
 
-                    </ul>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav>
+                                </li>
+
+                            </ul>
+                            <i class="bi bi-list mobile-nav-toggle"></i>
+
+                            </ul>
+                            <i class="bi bi-list mobile-nav-toggle"></i>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- .navbar -->
                 <asp:Button ID="btnSignOut" class="get-started-btn" runat="server" Text="Sign Out" OnClick="btnSignOut_Click" />
             </div>
@@ -74,6 +88,22 @@
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>
+
+        <script>
+
+            $(document).ready(function () {
+                var url = window.location;
+                $('.navbar .nav li').find('.active').removeClass('active');
+                $('.navbar .nav li a').each(function () {
+                    if (this.href == url) {
+                        $(this).addClass('active');
+                        console.log("clicked");
+                    }
+                });
+            });
+
+
+        </script>
     </form>
 </body>
 </html>

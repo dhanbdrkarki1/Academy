@@ -1,4 +1,17 @@
-﻿create database AcademyDB
+﻿select u.FullName as Instructor, u.Email, u.Profile_Img, c.Title, cc.Category, e.TotalAmt, e.EnrollmentDate  from UserAccount as u 
+inner join Courses as c on c.InstructorId=u.AccountId 
+inner join CourseCategory as cc on cc.CourseCatId=c.Category
+inner join EnrollCourse as e on e.CourseId = c.CourseId
+
+
+
+select c.Title, cc.Category,  e.TotalAmt, e.EnrollmentDate from EnrollCourse as e 
+inner join Courses as c on c.CourseId=e.CourseId 
+inner join CourseCategory as cc on cc.CourseCatId=c.Category
+where e.InstructorId=5
+
+
+create database AcademyDB
 use AcademyDB
 
 create table UserAccount(

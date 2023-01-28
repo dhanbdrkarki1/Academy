@@ -1,23 +1,11 @@
-﻿$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-	
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;                        
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;                        
-			});
-		} 
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
+﻿$(document).ready(function () {
+    console.log("yes");
+    var url = window.location;
+    $('.navbar .nav li').find('.active').removeClass('active');
+    $('.navbar .nav li a').each(function () {
+        if (this.href == url) {
+            $(this).addClass('active');
+            console.log("clicked");
+        }
+    });
 });

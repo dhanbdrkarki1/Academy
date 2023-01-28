@@ -25,7 +25,7 @@ namespace Academy
             {
                 retrieveData();
             }
-            else
+            if (IsPostBack)
             {
                 showOverView();
             }
@@ -37,10 +37,8 @@ namespace Academy
         {
             string script = "$(document).ready(function () { $('#overviewModal').modal('show'); });";
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", script, true);
-            
-            
             string courseId = Request.Params["__EVENTARGUMENT"];
-            
+
             List<object[]> courseData = (List<object[]>)ViewState["CData"];
 
 
@@ -54,7 +52,7 @@ namespace Academy
                 string imgpath = data[5].ToString();
                 if (imgpath == "")
                 {
-                    imgpath = "~/Images/Content/no-image-icon.png";
+                    imgpath = "~/Images/Profile/user.png";
                 }
                 imgpath = Page.ResolveUrl(imgpath);
                 string instructor = data[6].ToString();
@@ -76,7 +74,7 @@ namespace Academy
             string accountQuery = "select * from UserAccount where AccountId=@id";
             string categoryQuery = "select * from CourseCategory where CourseCatId=@id";
             string imageQuery = "select top 1 * from CourseContent where CId=@id";
-            
+
             Utils uObj = new Utils();
 
             SqlConnection con = new SqlConnection(connectionString);
@@ -95,17 +93,17 @@ namespace Academy
                     object[] data = new object[7];
                     data[0] = sdr["Courseid"];
                     data[1] = sdr["Title"];
-                    data[2] = uObj.getSpecificData(sdr["Category"].ToString(),categoryQuery,"Category");
+                    data[2] = uObj.getSpecificData(sdr["Category"].ToString(), categoryQuery, "Category");
                     data[3] = sdr["OverView"];
                     data[4] = sdr["Rate"];
                     data[5] = uObj.getSpecificData(sdr["Courseid"].ToString(), imageQuery, "ImageCont");
-                    data[6] = uObj.getSpecificData(sdr["Instructorid"].ToString(),accountQuery, "FullName");
+                    data[6] = uObj.getSpecificData(sdr["Instructorid"].ToString(), accountQuery, "FullName");
                     idList.Add(data[0].ToString());
 
                     dataList.Add(data);
                 }
                 sdr.Close();
-                ViewState["CourseData"] = dataList;
+                ViewState["CData"] = dataList;
             }
             catch (Exception ex)
             {
@@ -118,7 +116,7 @@ namespace Academy
         protected void btnEnrollCourse_Click(object sender, EventArgs e)
         {
             string courseId = ViewState["courseId"].ToString();
-            
+
             if (User.Identity.IsAuthenticated)
             {
                 // The user is logged in, so redirect them to the checkout page.
@@ -127,7 +125,7 @@ namespace Academy
             else
             {
                 // The user is not logged in, so redirect them to the login page.
-                Response.Redirect("Login.aspx?redirectUrl=Checkout.aspx"+ "&CourseId=" + courseId);
+                Response.Redirect("Login.aspx?redirectUrl=Checkout.aspx" + "&CourseId=" + courseId);
             }
         }
     }

@@ -110,8 +110,8 @@
 
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="lnkNavLink" EventName="Command" />
-
                 </Triggers>
+
             </asp:UpdatePanel>
 
 
