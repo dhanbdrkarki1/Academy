@@ -5,20 +5,20 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <%--ajax--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')
         });
 
-
-
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true"></asp:ScriptManager>
 
-    <main id="main" data-aos="fade-in">
+    <main id="main">
 
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
@@ -28,162 +28,176 @@
             </div>
         </div>
         <!-- End Breadcrumbs -->
-    </main>
 
 
+        <section id="features" class="features mt-5">
+            <div class="container">
+                <div class="row" data-aos="zoom-in" data-aos-delay="100">
 
-
-    <div class="container">
-        <div class="row mt-5">
-            <%--            <div class="col-3">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <%
-                        List<object[]> contentData = (List<object[]>)ViewState["ContentData"];
-                        int index = 0;
+                        List<object[]> contentData = (List<object[]>)ViewState["ContentTitleList"];
+                        int index = 1;
                         foreach (object[] data in contentData)
                         {
                             int contentId = (int)data[0];
                             string contentTitle = (string)data[2];
 
                     %>
-                    <asp:HiddenField ID="hiddenContentId" runat="server" ClientIDMode="Static" />
-                    <a class="nav-link <%= index == 0 ? "active" : "" %>" id="v-pills-<%= contentId %>-tab" data-toggle="pill" href="#v-pills-<%= contentId %>" role="tab" aria-controls="v-pills-<%= contentId %>" aria-selected="<%= index == 0 ? "true" : "false" %>" onclick="SetViewState('<%= contentId %>');return false;">
-                        <%= contentTitle %>
-                    </a>
 
+                    <div class="col-lg-3 col-md-4">
+                        <div class="icon-box">
+                            <%--onclick="fillContentForm(<%= contentId %>)"--%>
+                            <h3><a href="#" style="text-decoration: none;" onclick="fillContentForm(<%= contentId %>); return false;" data-toggle="modal" data-target="#btnUpdateContent"><%= index %>: <%= contentTitle %>    </a></h3>
+                        </div>
+                    </div>
 
                     <%
                             index++;
                         }
+
+
                     %>
                 </div>
-            </div>--%>
+            </div>
+        </section>
 
-            <h3>Hlllo world</h3>
-            <asp:UpdatePanel runat="server" ID="UpdatePanel1">
-                <ContentTemplate>
+    </main>
 
-                    <div class="col-3">
-                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <asp:Repeater ID="repeaterNavLinks" runat="server" OnItemCommand="repeaterNavLinks_ItemCommand">
-                                <ItemTemplate>
 
-                                    <asp:LinkButton ID="lnkNavLink" runat="server" CommandName="Update" CommandArgument='<%# Eval("[0]") %>' Text='<%# Eval("[2]") %>' CssClass='nav-link' />
-                                </ItemTemplate>
-                            </asp:Repeater>
+    <%--content modal--%>
+    <div class="modal fade" id="btnUpdateContent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Course Content</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
+                        <asp:TextBox ID="txtContentTitle" class="form-control" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" Text="Content Text:"></asp:Label>
+                        <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" Text="Image:"></asp:Label>
+                        <asp:FileUpload ID="ftImage" class="form-control" runat="server" />
+                        <asp:Label ID="iPath" runat="server" style="display: none;"></asp:Label>
 
-                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" Text="Content Url:"></asp:Label>
+                        <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url"></asp:TextBox>
+
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
+                        <asp:FileUpload ID="ftFile" class="form-control" runat="server" />
+                        <asp:Label ID="fPath" runat="server" style="display: none;"></asp:Label>
                     </div>
 
-
-
-                    <div class="col-9">
-                        <div class="tab-content" id="v-pills-tabContent">
-                            <!-- update form -->
-                            <div class="form-group">
-                                <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
-                                <asp:TextBox ID="TextBox1" class="form-control" runat="server" ClientIDMode="Static"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" Text="Content Text:"></asp:Label>
-                                <asp:TextBox ID="TextBox2" Rows="7" class="form-control" runat="server" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" Text="Image:"></asp:Label>
-                                <asp:FileUpload ID="FileUpload1" class="form-control" runat="server" ClientIDMode="Static" />
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" Text="Content Url:"></asp:Label>
-                                <asp:TextBox ID="TextBox3" class="form-control" runat="server" TextMode="Url" ClientIDMode="Static"></asp:TextBox>
-
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
-                                <asp:FileUpload ID="FileUpload2" class="form-control" runat="server" ClientIDMode="Static" />
-                            </div>
-
-                            <asp:Button ID="Button1" class="btn btn-secondary" runat="server" Text="Clear" />
-                            <asp:Button ID="Button2" class="btn btn-primary" runat="server" Text="Update" />
-                        </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnClose" class="btn btn-secondary" data-dismiss="modal" runat="server" Text="Close" />
+                        <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Update" OnClick="btnUpdateCourseContent_Click" />
                     </div>
-                </ContentTemplate>
 
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="lnkNavLink" EventName="Command" />
-                </Triggers>
-
-            </asp:UpdatePanel>
-
-
-
-
-            <%--            <asp:UpdatePanel runat="server" ID="UpdatePanel1">
-                <ContentTemplate>
-                    <div class="col-9">
-                        <div class="tab-content" id="v-pills-tabContent">
-                            <%
-                                index = 0;
-                                foreach (object[] data in contentData)
-                                {
-                                    int contentId = (int)data[0];
-                                    string contTitle = (string)data[2];
-                            %>
-                            <div class="tab-pane fade show <%= (string)ViewState["viewstate"] == contentId.ToString() || (string)ViewState["hiddenContentId"] == contentId.ToString() ? "active" : "" %>" id="v-pills-<%= contentId %>" role="tabpanel" aria-labelledby="v-pills-<%= contentId %>-tab">
-
-                                <!-- update form -->
-                                <div class="form-group">
-                                    <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
-                                    <asp:TextBox ID="txtContentTitle" class="form-control" runat="server" ClientIDMode="Static"></asp:TextBox>
-                                </div>
-                                <div class="form-group">
-                                    <asp:Label runat="server" Text="Content Text:"></asp:Label>
-                                    <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
-                                </div>
-                                <div class="form-group">
-                                    <asp:Label runat="server" Text="Image:"></asp:Label>
-                                    <asp:FileUpload ID="ftImage" class="form-control" runat="server" ClientIDMode="Static" />
-                                </div>
-                                <div class="form-group">
-                                    <asp:Label runat="server" Text="Content Url:"></asp:Label>
-                                    <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url" ClientIDMode="Static"></asp:TextBox>
-
-                                </div>
-                                <div class="form-group">
-                                    <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
-                                    <asp:FileUpload ID="ftFile" class="form-control" runat="server" ClientIDMode="Static" />
-                                </div>
-
-                                <asp:Button ID="btnClose" class="btn btn-secondary" runat="server" Text="Clear" />
-                                <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Update" />
-
-
-                            </div>
-
-                            <%
-                                    index++;
-                                }
-                            %>
-                        </div>
+<%--                    <%if (ViewState["contMsg"].ToString() != "")
+                        {
+                    %>
+                    <div class="alert alert-success" role="alert">
+                        <%=ViewState["contMsg"].ToString() %>
                     </div>
-                </ContentTemplate>
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="v-pills-tab" EventName="click" />
-                </Triggers>
-            </asp:UpdatePanel>--%>
+
+                    <%} %>--%>
+                </div>
+
+            </div>
         </div>
     </div>
 
     <script>
 
-        function SetViewState(contentId) {
-            console.log(contentId);
-            var hiddenContentId = document.getElementById("hiddenContentId");
-            hiddenContentId.setAttribute("value", contentId);
+        function fillContentForm(contentId) {
+            var imgName = "";
+            var fileName = "";
+            $.ajax({
+                type: "POST",
+                url: "InstructorCourseContentUpdate.aspx/GetContentData",
+                data: JSON.stringify({ contentId: contentId }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var cd = JSON.parse(data.d);
+                    console.log(cd);
+                    // cd as cookie
+                    document.cookie = "contid=" + contentId;
 
-            //__doPostBack('hiddenContentId', contentId);
+                    // Update the modal content with the response data
+                    $("#ContentPlaceHolder1_txtContentTitle").val(cd.title);
+                    $("#ContentPlaceHolder1_txtCContent").val(cd.text);
+                    $("#ContentPlaceHolder1_txtUrl").val(cd.url);
 
-            //console.log(document.getElementById("hiddenContentId").value);
-<%--            var cData = <%= new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewState["ContentData"]) %>;
+                    var imgPreview = document.getElementById("ContentPlaceHolder1_iPath");
+                    var filePreview = document.getElementById("ContentPlaceHolder1_fPath");
+                    imgName = cd.img;
+                    fileName = cd.file;
+                    if (imgName == "") {
+                        imgPreview.style.display = "block";
+                        imgPreview.innerHTML = "No image uploaded yet.";
+                    } else {
+                        imgPreview.style.display = "block";
+                        imgPreview.innerHTML = imgName;
+                    }
+
+                    if (fileName == "") {
+                        filePreview.style.display = "block";
+                        filePreview.innerHTML = "No file uploaded yet.";
+                    } else {
+                        filePreview.style.display = "block";
+                        filePreview.innerHTML = imgName;
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX request failed: " + error);
+                }
+            });
+
+
+
+
+        }
+
+
+        document.querySelector("#ContentPlaceHolder1_ftImage").addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            preview.innerHTML = file;
+            preview.style.display = "block";
+        });
+
+        //var fileInput = document.getElementById("#ContentPlaceHolder1_ftImage");
+        //console.log(fileInput)
+        //var preview = document.getElementById("preview");
+
+        //fileInput.addEventListener("change", function () {
+        //    var file = fileInput.files[0];
+        //    var reader = new FileReader();
+
+        //    reader.onload = function (event) {
+        //        preview.innerHTML = event.target.result;
+        //        preview.style.display = "block";
+        //    };
+
+        //    reader.readAsDataURL(file);
+        //});
+    </script>
+
+    <%--//console.log(document.getElementById("hiddenContentId").value);--%>
+    <%--            var cData = <%= new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewState["ContentData"]) %>;
             
 
             for (var i = 0; i < cData.length; i++) {
@@ -197,7 +211,7 @@
                 }
             }--%>
         }
-    </script>
+
 
 
 

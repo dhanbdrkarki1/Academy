@@ -13,6 +13,8 @@ using System.Reflection;
 using System.Web.Script.Serialization;
 using System.Xml.Linq;
 using System.Web.Services;
+using System.IO;
+using System.Web.UI.HtmlControls;
 
 namespace Academy
 {
@@ -24,29 +26,50 @@ namespace Academy
         {
             if (!IsPostBack)
             {
-                // retrieve content data from the database and store it in the ViewState
                 retrieveContentData();
-
-                List<object[]> contentData = (List<object[]>)ViewState["ContentData"];
-
-
-                // retrieve content data from the database and store it in the ViewState
-                retrieveContentData();
-                repeaterNavLinks.DataSource = contentData;
-                System.Diagnostics.Debug.WriteLine("contentData[2].Value: " + contentData[2]);
-                repeaterNavLinks.DataBind();
-
-
-
-
             }
-            //else
+            //if(IsPostBack)
             //{
             //    string contentId = Request.Params["__EVENTARGUMENT"];
             //    System.Diagnostics.Debug.WriteLine("cccccid..: " + contentId);
-            //    fillFormData(contentId);
             //}
+        }
 
+
+        [WebMethod]
+        public static string GetContentData(string contentId)
+        {
+            string title = "";
+            string text = "";
+            string img = "";
+            string file = "";
+            string url = "";
+            string contid = "";
+
+            Utils uObj = new Utils();
+            String query = "select * from CourseContent where CourseContId=@cid";
+
+            //queries params
+            SqlParameter cid = new SqlParameter("@cid", SqlDbType.Int);
+            cid.Value = Convert.ToInt32(contentId);
+
+            SqlParameter[] parameters = { cid };
+
+            System.Diagnostics.Debug.WriteLine("all good................");
+            SqlDataReader sdr = uObj.DbAction(query, parameters);
+            while (sdr.Read())
+            {
+                contid = contentId;
+                title = sdr["ContTitle"].ToString();
+                text = sdr["TextCont"].ToString();
+                img = sdr["ImageCont"].ToString();
+                file = sdr["FileCont"].ToString();
+                url = sdr["ContentUrl"].ToString();
+            }
+
+
+            string contentData = "{\"contid\":\"" + contentId + "\",\"title\":\"" + title + "\", \"text\":\"" + text + "\", \"img\":\"" + img + "\", \"file\":\"" + file + "\", \"url\":\"" + url + "\"}";
+            return contentData;
 
         }
 
@@ -77,22 +100,17 @@ namespace Academy
 
                 while (sdr.Read())
                 {
-                    object[] data = new object[8];
+                    object[] data = new object[3];
                     data[0] = sdr["CourseContId"];
                     data[1] = sdr["CId"];
                     data[2] = sdr["ContTitle"];
-                    data[3] = sdr["TextCont"];
-                    data[4] = sdr["ImageCont"];
-                    data[5] = sdr["FileCont"];
-                    data[6] = sdr["ContentUrl"];
-                    data[7] = true;
                     dataList.Add(data);
 
 
                 }
                 sdr.Close();
 
-                ViewState["ContentData"] = dataList;
+                ViewState["ContentTitleList"] = dataList;
             }
             catch (Exception ex)
             {
@@ -101,116 +119,87 @@ namespace Academy
         }
 
 
-        protected void lnkNavLink_Click(object sender, EventArgs e)
+        protected void btnUpdateCourseContent_Click(object sender, EventArgs e)
         {
-            LinkButton lnkNavLink = (LinkButton)sender;
-            int contentId = Convert.ToInt32(lnkNavLink.CommandArgument);
-            fillFormData(contentId);
-            UpdatePanel1.Update();
-        }
+            var contid = Request.Cookies["contid"].Value;
+            System.Diagnostics.Debug.WriteLine("all right..." + contid);
 
+            string courseId = Request.QueryString["Cid"];
+            System.Diagnostics.Debug.WriteLine("all right..." + courseId);
+            string query = "update CourseContent set ContTitle=@title, TextCont=@text, ImageCont=@img, FileCont=@file, ContentUrl=@url where Cid=@cid";
+            Utils uObj = new Utils();
 
-        void fillFormData(int contId)
-        {
-            int contentId = contId;
+            SqlParameter cid = new SqlParameter("@cid", SqlDbType.Int);
+            cid.Value = Convert.ToInt32(courseId);
 
+            SqlParameter title = new SqlParameter("@title", SqlDbType.Char);
+            title.Value = txtContentTitle.Text;
 
-            System.Diagnostics.Debug.WriteLine("formdata..: " + contentId);
-            //ViewState["contentId"] = contentId;
+            SqlParameter txt = new SqlParameter("@text", SqlDbType.Char);
+            txt.Value = txtCContent.Text;
 
-            TextBox txtContentTitle = (TextBox)UpdatePanel1.FindControl("txtContentTitle");
-            TextBox txtCContent = (TextBox)UpdatePanel1.FindControl("txtCContent");
-            TextBox txtUrl = (TextBox)UpdatePanel1.FindControl("txtUrl");
+            // saving image a& file locally
+            string imgPath = "";
+            string filePath = "";
+            string imgfolderPath = Server.MapPath("~/Images/Content/");
 
-
-            List<object[]> contentData = (List<object[]>)ViewState["ContentData"];
-            foreach (object[] data in contentData)
+            if (ftImage.HasFile)
             {
-
-                if (Convert.ToInt16(data[0]) == contentId)
-
+                string imgName = ftImage.FileName;
+                imgPath = "~/Images/Content/" + imgName;
+                ftImage.SaveAs(imgfolderPath + Path.GetFileName(ftImage.FileName));
+            }
+            else
+            {
+                if (iPath.Text == "No image uploaded yet.")
                 {
-                    System.Diagnostics.Debug.WriteLine("if..: " + contentId);
-                    txtContentTitle.Text = (string)data[2];
-                    txtCContent.Text = (string)data[3];
-                    txtUrl.Text = (string)data[5];
-                    break;
+                    imgPath = "";
                 }
-
-            }
-        }
-
-        protected void repeaterNavLinks_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "Update")
-            {
-                // Retrieve the contentId from the CommandArgument
-                int contentId = Convert.ToInt32(e.CommandArgument);
-
-                // Fill the form data
-                fillFormData(contentId);
-
-                // Trigger the UpdatePanel
-                UpdatePanel1.Update();
-            }
-        }
-
-
-
-
-        //protected void pills_tab_Click(object sender, EventArgs e)
-        //{
-        //    // retrieve the ID of the clicked button
-        //    LinkButton clickedButton = (LinkButton)sender;
-        //    int contentId = Convert.ToInt32(clickedButton.ID.Split('-')[2]);
-
-        //    // update the hidden field with the ID
-        //    HiddenField hiddenContentId = (HiddenField)FindControl("hiddenContentId");
-        //    hiddenContentId.Value = contentId.ToString();
-
-        //    // fill the form with the corresponding data
-        //    fillFormData(contentId.ToString());
-
-        //    // update the UpdatePanel
-        //    UpdatePanel1.Update();
-        //}
-
-
-
-
-
-
-        [System.Web.Services.WebMethod]
-        public static void SetViewState(int contentId, string cData)
-        {
-            List<object[]> contentData = new JavaScriptSerializer().Deserialize<List<object[]>>(cData);
-            System.Diagnostics.Debug.WriteLine("hiddenValue..: " + contentId);
-            foreach (object[] data in contentData)
-            {
-                if ((int)data[0] == contentId)
+                else
                 {
-                    string contentTitle = (string)data[2];
-                    string contentText = (string)data[3];
-                    string contentUrl = (string)data[5];
-                    Page page = HttpContext.Current.CurrentHandler as Page;
-
-                    TextBox txtContentTitle = (TextBox)page.FindControl("txtContentTitle");
-                    TextBox txtCContent = (TextBox)page.FindControl("txtCContent");
-                    TextBox txtUrl = (TextBox)page.FindControl("txtUrl");
-                    // Set the value of the textbox controls
-                    txtContentTitle.Text = contentTitle;
-                    txtCContent.Text = contentText;
-                    txtUrl.Text = contentUrl;
-                    break;
-
+                    imgPath = iPath.Text;
                 }
-
             }
+
+            if (ftFile.HasFile)
+            {
+                string fileName = ftFile.FileName;
+                filePath = "~/Images/Content/" + fileName;
+                ftImage.SaveAs(imgfolderPath + Path.GetFileName(ftFile.FileName));
+            }
+            else
+            {
+                if (fPath.Text == "No file uploaded yet.")
+                {
+                    filePath = "";
+                }
+                else
+                {
+                    filePath = fPath.Text;
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine("img: " + imgPath);
+
+            SqlParameter img = new SqlParameter("@img", SqlDbType.Char);
+            img.Value = imgPath;
+            SqlParameter file = new SqlParameter("@file", SqlDbType.Char);
+            file.Value = filePath;
+            SqlParameter url = new SqlParameter("@url", SqlDbType.Char);
+            url.Value = txtUrl.Text;
+
+            SqlParameter[] parameters = { cid, title, txt, img, file, url };
+
+            if (uObj.DbAction(query, parameters) != null)
+            {
+                ViewState["contMsg"] = "Content updated successfully.";
+                System.Diagnostics.Debug.WriteLine("yooooooooo" + courseId);
+            }
+
 
         }
 
 
 
-        // Set the ViewState variable when a content title is clicked
     }
 }

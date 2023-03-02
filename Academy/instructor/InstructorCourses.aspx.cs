@@ -88,7 +88,7 @@ namespace Academy
             title.Value = txtCourseTitle.Text;
 
             SqlParameter category = new SqlParameter("@category", SqlDbType.Int);
-            category.Value = Convert.ToInt32(ddCategory.SelectedIndex+1);
+            category.Value = Convert.ToInt32(ddCategory.SelectedIndex + 1);
 
             SqlParameter overview = new SqlParameter("@overview", SqlDbType.VarChar);
             overview.Value = txtOverView.Text;
@@ -129,10 +129,6 @@ namespace Academy
         {
             string instructorId = getInstructorId();
             string query = "select c.CourseId, c.Title, cc.Category, c.OverView, c.Rate, c.CreatedAt from Courses c join CourseCategory cc on c.Category = cc.CourseCatId where c.InstructorId='" + instructorId + "'";
-
-            //String query = "select Courses.Title, CourseCategory.Category, Courses.OverView, Courses.Rate, Courses.CreatedAt from Courses inner join CourseCategory on Courses.Category=CourseCategory.CourseCatId where Courses.InstructorId='" + instructorId + "' ";
-            //string query = "select Courses.Title, CourseCategory.Category, Courses.OverView, Courses.Rate, Courses.CreatedAt from Courses inner join CourseCategory on Courses.Category=CourseCategory.CourseCatId where Courses.InstructorId=1";
-            //string query1 = "select * from Courses where InstructorId='" + Convert.ToInt32(instructorId) + "' ";
             SqlConnection con = new SqlConnection(connectionString);
 
             try
@@ -272,7 +268,7 @@ namespace Academy
                         ddList.DataValueField = "CourseCatId";
                         ddList.DataBind();
                         string selectedCategory = DataBinder.Eval(e.Row.DataItem, "Category").ToString();
-                        
+
 
                         ddList.Items.FindByText(selectedCategory).Selected = true;
                     }
