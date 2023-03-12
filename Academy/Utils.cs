@@ -46,27 +46,22 @@ namespace Academy
             User user_obj = new User();
             user_obj.Username = username;
             user_obj.Password = password;
-
             string connectionString = WebConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
             String query = "select count(*) from UserAccount where Username='" + user_obj.Username + "' and Password='" + user_obj.Password + "' ";
             String ac_type = "select AccountType from UserAccount where username = '" + user_obj.Username + "'";
             SqlConnection con = new SqlConnection(connectionString);
-
             try
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlCommand cmdName = new SqlCommand(ac_type, con);
-
                 string user_role = cmdName.ExecuteScalar().ToString();
-
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 cmd.ExecuteNonQuery();
                 if (dt.Rows[0][0].ToString() == "1")
                 {
-
                     if (user_role == "Instructor")
                     {
                         return user_role;
@@ -79,15 +74,12 @@ namespace Academy
                         return user_role;
                     }
                 }
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Something went wrong.");
             }
-
             return null;
-
         }
 
         public string getDate()

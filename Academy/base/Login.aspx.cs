@@ -7,7 +7,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.Configuration;
 using System.Web.Security;
 
 namespace Academy
@@ -28,8 +27,6 @@ namespace Academy
 
                 string redirectUrl = Request.QueryString["redirectUrl"];
                 string courseId = Request.QueryString["CourseId"];
-
-
                 string username, password;
                 username = Username.Text;
                 password = Password.Text;

@@ -68,26 +68,23 @@ namespace Academy
             }
         }
 
+        // reading courses info from database
         void retrieveData()
         {
             string query = "select * from Courses";
             string accountQuery = "select * from UserAccount where AccountId=@id";
             string categoryQuery = "select * from CourseCategory where CourseCatId=@id";
             string imageQuery = "select top 1 * from CourseContent where CId=@id";
-
             Utils uObj = new Utils();
-
             SqlConnection con = new SqlConnection(connectionString);
             try
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlDataReader sdr = cmd.ExecuteReader();
-
                 // Read the data and store it in the ViewState
                 List<object[]> dataList = new List<object[]>();
                 List<string> idList = new List<string>();
-
                 while (sdr.Read())
                 {
                     object[] data = new object[7];
@@ -107,7 +104,7 @@ namespace Academy
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine("Something went wrong.: " + ex.Message);
             }
         }
 
