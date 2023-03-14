@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/css/Custom.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <%--<script src="../assets/js/Custom.js"></script>--%>
+    <script src="../assets/js/Custom.js"></script>
     <style>
         td > a:first-child,
         td > a:first-child {
@@ -64,6 +64,11 @@
                 <asp:GridView ID="gvManageCourse" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" ShowHeaderWhenEmpty="true"
                     OnRowEditing="gvManageCourse_RowEditing" OnRowCancelingEdit="gvManageCourse_RowCancelingEdit" OnRowUpdating="gvManageCourse_RowUpdating"
                     OnRowDeleting="gvManageCourse_RowDeleting" OnRowDataBound="gvManageCourse_RowDataBound" class="table table-striped table-hover">
+
+
+                    <%--                <asp:GridView ID="gvManageCourse" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId"
+                    ShowHeaderWhenEmpty="true" OnRowEditing="gvManageCourse_RowEditing" OnRowCancelingEdit="gvManageCourse_RowCancelingEdit"
+                    OnRowUpdating="gvManageCourse_RowUpdating" OnRowDeleting="gvManageCourse_RowDeleting" OnRowDataBound="gvManageCourse_RowDataBound" class="table table-striped table-hover">--%>
 
                     <Columns>
                         <asp:TemplateField HeaderText="Course ID">

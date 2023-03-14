@@ -90,24 +90,18 @@ namespace Academy
         }
 
 
-        // takes query and use it to retrieve/insert data from db
+        // takes query and use it to retrieve/insert/delete data from db
         public SqlDataReader DbAction(string query, SqlParameter[] param)
         {
-            System.Diagnostics.Debug.WriteLine("Connecting diag................");
-
-
             SqlConnection con = new SqlConnection(connectionString);
             try
             {
                 System.Diagnostics.Debug.WriteLine("query= " + query + param);
-
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
-                System.Diagnostics.Debug.WriteLine("Connecting sql................");
                 if (param != null){
                     cmd.Parameters.AddRange(param);
-                    System.Diagnostics.Debug.WriteLine("Connected sql................");
-
+                    System.Diagnostics.Debug.WriteLine("passed................");
                 }
 
                 try
@@ -128,7 +122,5 @@ namespace Academy
             }
             return null;
         }
-
-
     }
 }

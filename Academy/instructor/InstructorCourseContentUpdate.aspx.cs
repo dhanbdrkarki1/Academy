@@ -121,16 +121,16 @@ namespace Academy
 
         protected void btnUpdateCourseContent_Click(object sender, EventArgs e)
         {
-            var contid = Request.Cookies["contid"].Value;
+            string contid = Request.Cookies["contid"].Value.ToString();
             System.Diagnostics.Debug.WriteLine("all right..." + contid);
 
             string courseId = Request.QueryString["Cid"];
             System.Diagnostics.Debug.WriteLine("all right..." + courseId);
-            string query = "update CourseContent set ContTitle=@title, TextCont=@text, ImageCont=@img, FileCont=@file, ContentUrl=@url where Cid=@cid";
+            string query = "update CourseContent set ContTitle=@title, TextCont=@text, ImageCont=@img, FileCont=@file, ContentUrl=@url where CourseContId=@cid";
             Utils uObj = new Utils();
 
             SqlParameter cid = new SqlParameter("@cid", SqlDbType.Int);
-            cid.Value = Convert.ToInt32(courseId);
+            cid.Value = Convert.ToInt32(contid);
 
             SqlParameter title = new SqlParameter("@title", SqlDbType.Char);
             title.Value = txtContentTitle.Text;
@@ -194,6 +194,7 @@ namespace Academy
             {
                 ViewState["contMsg"] = "Content updated successfully.";
                 System.Diagnostics.Debug.WriteLine("yooooooooo" + courseId);
+                GetContentData(contid);
             }
 
 

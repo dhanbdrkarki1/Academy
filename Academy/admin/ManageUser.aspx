@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/AdminPage.Master" AutoEventWireup="true" CodeBehind="ManageUser.aspx.cs" Inherits="Academy.admin.WebForm3" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -30,6 +31,9 @@
             align-content: center;
         }
     </style>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <main id="main" data-aos="fade-in">
 
         <!-- ======= Breadcrumbs ======= -->
@@ -57,66 +61,70 @@
                     </div>
                 </div>
 
-                <asp:GridView ID="gvManageCourse" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" ShowHeaderWhenEmpty="true"
-                    OnRowEditing="gvManageCourse_RowEditing" OnRowCancelingEdit="gvManageCourse_RowCancelingEdit" OnRowUpdating="gvManageCourse_RowUpdating"
-                    OnRowDeleting="gvManageCourse_RowDeleting" OnRowDataBound="gvManageCourse_RowDataBound" class="table table-striped table-hover">
+
+                <%--                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="AccountId" ShowHeaderWhenEmpty="true"
+                    OnRowEditing="gvManageUserAccount_RowEditing" OnRowCancelingEdit="gvManageUserAccount_RowCancelingEdit" OnRowUpdating="gvManageUserAccount_RowUpdating"
+                    OnRowDeleting="gvManageUserAccount_RowDeleting" OnRowDataBound="gvManageUserAccount_RowDataBound" class="table table-striped table-hover">--%>
+
+
+                <asp:GridView ID="gvManageUserAccount" runat="server" AutoGenerateColumns="false" DataKeyNames="AccountId" ShowHeaderWhenEmpty="true"
+                    OnRowEditing="gvManageUserAccount_RowEditing" OnRowCancelingEdit="gvManageUserAccount_RowCancelingEdit" OnRowUpdating="gvManageUserAccount_RowUpdating"
+                    OnRowDeleting="gvManageUserAccount_RowDeleting" OnRowDataBound="gvManageUserAccount_RowDataBound" class="table table-striped table-hover">
 
                     <Columns>
-                        <asp:TemplateField HeaderText="Course ID">
+                        <asp:TemplateField HeaderText="Account ID">
                             <ItemTemplate>
-                                <asp:Label ID="lblCourseId" Text='<%# Eval("CourseId") %>' runat="server" />
+                                <asp:Label ID="lblAccountId" Text='<%# Eval("AccountId") %>' runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Title">
+
+                        <asp:TemplateField HeaderText="Full Name">
                             <ItemTemplate>
-                                <asp:Label ID="lblTitle" Text='<%# Eval("Title") %>' runat="server" />
+                                <asp:Label ID="lblFullName" Text='<%# Eval("FullName") %>' runat="server" />
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtTitle" Text='<%# Eval("Title") %>' runat="server" />
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Category">
-                            <ItemTemplate>
-                                <asp:Label Text='<%# Eval("Category") %>' runat="server" />
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:DropDownList ID="ddlCat" AppendDataBoundItems="true" runat="server"></asp:DropDownList>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Overview">
-                            <ItemTemplate>
-                                <asp:Label Text='<%# Eval("OverView") %>' runat="server" />
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="txtOverView" Text='<%# Eval("OverView") %>' runat="server" />
+                                <asp:TextBox ID="txtFullName" Text='<%# Eval("FullName") %>' runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:TemplateField HeaderText="Rate">
+                        <asp:TemplateField HeaderText="Email">
                             <ItemTemplate>
-                                <asp:Label Text='<%# Eval("Rate") %>' runat="server" />
+                                <asp:Label ID="lblEmail" Text='<%# Eval("Email") %>' runat="server" />
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtRate" Text='<%# Eval("Rate") %>' runat="server" />
+                                <asp:TextBox ID="txtEmail" Text='<%# Eval("Email") %>' runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:TemplateField HeaderText="Created Date">
+                        <asp:TemplateField HeaderText="Username">
                             <ItemTemplate>
-                                <asp:Label ID="lblCreatedAt" runat="server" Text='<%# Eval("CreatedAt") %>'></asp:Label>
+                                <asp:Label ID="txtUsername" Text='<%# Eval("Username") %>' runat="server" />
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtCreatedAt" ReadOnly="true" runat="server" Text='<%# Eval("CreatedAt") %>'></asp:TextBox>
+                                <asp:TextBox ID="txtUsername" Text='<%# Eval("Username") %>' runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:CommandField ButtonType="Link" HeaderText="Course Actions" ShowEditButton="true" ShowDeleteButton="true" />
-                        <asp:TemplateField HeaderText="Content Actions" ItemStyle-Width="150">
+                        <asp:TemplateField HeaderText="AccountType">
                             <ItemTemplate>
-                                <asp:Button ID="lnkAddContent" OnClick="AddContent_Click" runat="server" CssClass="btn btn-primary" Text="Add Content" data-toggle="modal" data-target="#btnAddContent" />
-                                <asp:Button ID="lnkUpdateContent" runat="server" CssClass="btn btn-info" Text="Update Content" data-toggle="modal" data-target="#btnUpdateContent" OnClick="lnkUpdateContent_Click" />
+                                <asp:Label Text='<%# Eval("AccountType") %>' runat="server" />
                             </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtAccountType" Text='<%# Eval("AccountType") %>' runat="server" />
+                            </EditItemTemplate>
                         </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Password">
+                            <ItemTemplate>
+                                <asp:Label Text='<%# Eval("Password") %>' runat="server" />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtPassword" Text='<%# Eval("Password") %>' runat="server" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+
+                        <asp:CommandField ButtonType="Link" HeaderText="Account Actions" ShowEditButton="true" ShowDeleteButton="true" />
                     </Columns>
                 </asp:GridView>
                 <br />
@@ -124,13 +132,13 @@
                 <br />
                 <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
 
-                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:dbconnection %>" SelectCommand="SELECT * FROM [Courses]" UpdateCommand="update Courses set Title=@Title,Category=@Category,OverView=@OverView, Rate=@Rate,CreatedAt='' where CourseId=@CourseId" DeleteCommand="Delete from Courses where CourseId=@CourseId"></asp:SqlDataSource>
+                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:dbconnection %>" SelectCommand="SELECT * FROM [UserAccount]" UpdateCommand="update UserAccount set FullName=@FullName,Email=@Email,Username=@Username, AccountType=@AccountType,Profile_Img='' where AccountId=@AccountId" DeleteCommand="Delete from UserAccount where AccountId=@AccountId"></asp:SqlDataSource>
             </div>
         </div>
 
     </main>
 
-    <!-- courses Modal -->
+    <%--    <!-- courses Modal -->
     <div id="addEmployeeModal" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -145,7 +153,8 @@
                     <form>
                         <div class="form-group">
                             <asp:Label ID="lblCourseTitle" class="col-form-label" runat="server" Text="Course Title"></asp:Label>
-                            <asp:TextBox ID="txtCourseTitle" class="form-control" runat="server"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ControlToValidate="txtCourseTitle" ValidationGroup="ba"></asp:RequiredFieldValidator>
+                            <asp:TextBox ID="txtCourseTitle" class="form-control" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ControlToValidate="txtCourseTitle" ValidationGroup="ba"></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="lblCategory" class="col-form-label" runat="server" Text="Category"></asp:Label>
@@ -155,10 +164,12 @@
                         </div>
                         <div class="form-group">
                             <asp:Label ID="lblOverView" class="col-form-label" runat="server" Text="Overview"></asp:Label>
-                            <asp:TextBox ID="TextBox1" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ValidationGroup="ba" ControlToValidate="txtOverView"></asp:RequiredFieldValidator>
+                            <asp:TextBox ID="TextBox1" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ValidationGroup="ba" ControlToValidate="txtOverView"></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="lblRate" class="col-form-label" runat="server" Text="Rate"></asp:Label><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ForeColor="#CC3300" ErrorMessage="This Field is required." ControlToValidate="txtRate" ValidationGroup="ba" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:Label ID="lblRate" class="col-form-label" runat="server" Text="Rate"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ForeColor="#CC3300" ErrorMessage="This Field is required." ControlToValidate="txtRate" ValidationGroup="ba" Display="Dynamic"></asp:RequiredFieldValidator>
                             <asp:TextBox ID="TextBox2" class="form-control" runat="server"></asp:TextBox>
                         </div>
 
@@ -171,55 +182,5 @@
 
             </div>
         </div>
-    </div>
-
-
-    <%--content modal--%>
-    <div class="modal fade" id="btnAddContent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Course Content</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <asp:Label runat="server" for="txtInput" Text="Course Title:"></asp:Label>
-                        <asp:TextBox ID="txtCTitle" class="form-control" runat="server"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" for="txtInput" Text="Content Title:"></asp:Label>
-                        <asp:TextBox ID="txtContentTitle" class="form-control" runat="server"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" Text="Content Text:"></asp:Label>
-                        <asp:TextBox ID="txtCContent" Rows="7" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" Text="Image:"></asp:Label>
-                        <asp:FileUpload ID="ftImage" class="form-control" runat="server" />
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" Text="Content Url:"></asp:Label>
-                        <asp:TextBox ID="txtUrl" class="form-control" runat="server" TextMode="Url"></asp:TextBox>
-
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
-                        <asp:FileUpload ID="ftFile" class="form-control" runat="server" />
-                    </div>
-
-                    <div class="modal-footer">
-                        <asp:Button ID="btnClose" class="btn btn-secondary" data-dismiss="modal" runat="server" Text="Close" />
-                        <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Save Changes" OnClick="btnAddCourseContent_Click" />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    </div>--%>
 </asp:Content>
