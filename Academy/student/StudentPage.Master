@@ -42,7 +42,7 @@
                     <div class="navbar-inner">
                         <div class="container">
                             <ul class="nav">
-                                <li><a href="../base/Courses.aspx">Courses</a></li>
+                                <li><a href="CoursesDetail.aspx">Courses</a></li>
                                 <li><a class="active" href="Student.aspx">My Courses</a></li>
                                 <li><a href="StudentProfile.aspx">My Profile</a></li>
 
