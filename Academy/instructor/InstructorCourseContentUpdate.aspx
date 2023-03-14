@@ -131,6 +131,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
+                    console.log(data.d)
                     var cd = JSON.parse(data.d);
                     console.log(cd);
                     // cd as cookie

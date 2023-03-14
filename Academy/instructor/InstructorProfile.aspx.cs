@@ -141,27 +141,6 @@ namespace Academy
                 //Display the Picture in Image control.
                 loadUserProfilePic();
             }
-
-
-            //string folderPath = Server.MapPath("~/Images/Profile/");
-            //if (imgUpload.HasFile)
-            //{
-            //    imgUpload.SaveAs(folderPath + Path.GetFileName(imgUpload.FileName));
-            //    string path = folderPath + imgUpload.FileName;
-            //    lblMsg.Text = path;
-
-            //    string username = Session["username"].ToString();
-            //    string query = "update UserAccount set FullName='"+txtFullName.Text +"', Username='" + txtUsername.Text +"',Email='"+txtEmail.Text+ "',Password='" + txtConfirmPassword.Text +"', Profile_Img='" + path + "'  where Username='"+ username + "'";
-            //    SqlConnection con = new SqlConnection(connectionString);
-            //    con.Open();
-            //    SqlCommand cmd = new SqlCommand(query, con);
-            //    //Execute the query
-
-            //    cmd.ExecuteNonQuery();
-
-            //    //Display the Picture in Image control.
-            //    loadUserProfilePic();
-            //}
         }
 
         void loadUserProfilePic()

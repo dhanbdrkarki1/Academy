@@ -1,4 +1,5 @@
-﻿create database AcademyDB
+﻿
+create database AcademyDB
 use AcademyDB
 
 create table UserAccount(

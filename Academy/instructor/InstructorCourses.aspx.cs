@@ -75,30 +75,21 @@ namespace Academy
         //add courses in db
         protected void btnAddCourse(object sender, EventArgs e)
         {
-
             string instructorId = getInstructorId();
             Utils uObj = new Utils();
             var dateTimeVal = uObj.getDate();
             String query = "insert into Courses(Title,Category,OverView,Rate,CreatedAt, InstructorId) values(@title,@category,@overview,@rate,@createdAt,@id)";
 
-            System.Diagnostics.Debug.WriteLine("Add course: " + ddCategory.SelectedValue);
-
-
             SqlParameter title = new SqlParameter("@title", SqlDbType.VarChar);
             title.Value = txtCourseTitle.Text;
-
             SqlParameter category = new SqlParameter("@category", SqlDbType.Int);
             category.Value = Convert.ToInt32(ddCategory.SelectedIndex + 1);
-
             SqlParameter overview = new SqlParameter("@overview", SqlDbType.VarChar);
             overview.Value = txtOverView.Text;
-
             SqlParameter rate = new SqlParameter("@rate", SqlDbType.Int);
             rate.Value = Convert.ToInt32(txtRate.Text);
-
             SqlParameter createdAt = new SqlParameter("@createdAt", SqlDbType.Date);
             createdAt.Value = dateTimeVal;
-
             SqlParameter id = new SqlParameter("@id", SqlDbType.Int);
             id.Value = Convert.ToInt32(instructorId);
 
@@ -158,8 +149,6 @@ namespace Academy
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-
-                Console.WriteLine("Something went wrong.");
             }
         }
 
@@ -274,7 +263,7 @@ namespace Academy
                     }
                     catch (Exception ex)
                     {
-                        Response.Write(ex.Message);
+                        System.Diagnostics.Debug.WriteLine("Something went wrong.: " + ex.Message);
                     }
                 }
             }
@@ -358,7 +347,7 @@ namespace Academy
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                System.Diagnostics.Debug.WriteLine("Something went wrong.: " + ex.Message);
             }
         }
 

@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="academy-cmd.sql" />
-    <Content Include="AddCourse.aspx" />
     <Content Include="admin\Profile.aspx" />
     <Content Include="admin\ViewEnrollment.aspx" />
     <Content Include="admin\ManageUser.aspx" />
@@ -148,13 +147,11 @@
     <Content Include="assets\vendor\swiper\swiper-bundle.min.js" />
     <Content Include="base\Checkout.aspx" />
     <Content Include="base\InsCourses.aspx" />
-    <Content Include="Global.asax" />
     <Content Include="Images\Profile\user.png" />
     <Content Include="base\Login.aspx" />
     <Content Include="base\SignUp.aspx" />
     <Content Include="student\CoursesDetail.aspx" />
     <Content Include="student\StudentProfile.aspx" />
-    <Content Include="Test.aspx" />
     <Content Include="Web.config" />
     <Content Include="base\Index.aspx" />
     <Content Include="base\Courses.aspx" />
@@ -169,13 +166,6 @@
     <Content Include="instructor\InstructorCourseContentUpdate.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddCourse.aspx.cs">
-      <DependentUpon>AddCourse.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddCourse.aspx.designer.cs">
-      <DependentUpon>AddCourse.aspx</DependentUpon>
-    </Compile>
     <Compile Include="admin\AdminPage.Master.cs">
       <DependentUpon>AdminPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -231,9 +221,6 @@
     </Compile>
     <Compile Include="base\InsCourses.aspx.designer.cs">
       <DependentUpon>InsCourses.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="base\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -319,13 +306,6 @@
     </Compile>
     <Compile Include="student\StudentProfile.aspx.designer.cs">
       <DependentUpon>StudentProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Utils.cs" />
