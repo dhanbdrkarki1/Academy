@@ -15,12 +15,12 @@ using System.Data.SqlTypes;
 
 namespace Academy.student
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class WebForm11 : System.Web.UI.Page
     {
         string connectionString = WebConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            studentid();
         }
 
         // Get student Id from the data base

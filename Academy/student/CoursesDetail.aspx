@@ -1,166 +1,152 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/student/StudentPage.Master" AutoEventWireup="true" CodeBehind="CoursesDetail.aspx.cs" Inherits="Academy.student.WebForm1" %>
-<asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+﻿
+<%@ Page Title="Courses" Language="C#" MasterPageFile="Studentpage.Master" AutoEventWireup="true" CodeBehind="Courses.aspx.cs" Inherits="Academy.WebForm2" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../assets/css/Custom.css" />
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-    </script>
-</asp:Content>
+    <script src="../assets/js/Custom.js"></script>
+    <style>
+        .course-effect {
+            transition: .3s;
+        }
 
-<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+            .course-effect:hover {
+                box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+                transform: scale(1.01,1.01);
+            }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <main id="main" data-aos="fade-in">
 
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
             <div class="container">
-                <h2>Your Content</h2>
-                <p>Add more courses to earn more. The more courses you add, the more rich you go So hurry up and add more content.</p>
+                <h2><b> Courses </b> </h2>
+                <p> <h4> Learn the in-demand professional skills from the experts. Explore courses and get enrolled today.</h4> </p>
             </div>
         </div>
         <!-- End Breadcrumbs -->
-    </main>
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <!-- ======= Courses Section ======= -->
+        <section id="courses" class="courses">
+            <div class="container" data-aos="fade-up">
+                <div class="row mb-4" data-aos="zoom-in" data-aos-delay="100">
+
                     <%
-                        List<object[]> contentData = (List<object[]>)ViewState["ContentData"];
-                        int index = 0;
+                        List<object[]> contentData = (List<object[]>)ViewState["CData"];
                         foreach (object[] data in contentData)
                         {
-                            int contentId = (int)data[0];
-                            string contentTitle = (string)data[2];
+                            string courseid = data[0].ToString();
+                            string title = data[1].ToString();
+                            string category = data[2].ToString();
+                            string overview = data[3].ToString();
+                            string[] words = overview.Split(' ');
+                            string limitText = string.Join(" ", words.Take(25));
 
-                    %>
-                    <a class="nav-link <%= index == 0 ? "active" : "" %>" id="v-pills-<%= contentId %>-tab" data-toggle="pill" href="#v-pills-<%= contentId %>" role="tab" aria-controls="v-pills-<%= contentId %>" aria-selected="<%= index == 0 ? "true" : "false" %>" onclick="SetViewState('<%= contentId %>')">
-                        <%= contentTitle %>
-                    </a>
-                    <%
-                            index++;
-                        }
-                    %>
-                </div>
-            </div>
-            <div class="col-9">
-                <div class="tab-content" id="v-pills-tabContent">
-                    <%
-                        index = 0;
-                        foreach (object[] data in contentData)
-                        {
-                            int contentId = (int)data[0];
-                            int cid = (int)data[1];
-                            string contTitle = (string)data[2];
-                            string contText = (string)data[3];
-                            string contImage = (string)data[4];
-                            string contFile = (string)data[5];
-                            string contUrl = (string)data[6];
-                    %>
-                    <div class="tab-pane fade show <%= (string)ViewState["viewstate"] == contentId.ToString() ? "active" : "" %>" id="v-pills-<%= contentId %>" role="tabpanel" aria-labelledby="v-pills-<%= contentId %>-tab">
-                        <!-- content titlte -->
-                        <h3><%= contTitle %></h3>
-
-                        <%--content text--%>
-                        <p><%= contText %></p>
-
-
-                        <%--image content--%>
-                        <%
-                            if (contImage != null)
+                            if (words.Length > 25)
                             {
-                        %>
-                        <img src="<%= contImage %>" />
-                        <%
+                                limitText += "...";
                             }
-                            else
+
+                            string rate = data[4].ToString();
+                            string imgpath = data[5].ToString();
+                            if (imgpath == "")
                             {
-                        %>
-                        <p>Image not found.</p>
-                        <%
+                                imgpath = "~/Images/Content/no-image-icon.png";
                             }
-                        %>
+                            imgpath = Page.ResolveUrl(imgpath);
+                            string instructor = data[6].ToString();
+                    %>
 
-
-                        <%--video url--%>
-                        <%
-                            if (contImage != null)
-                            {
-                        %>
-                        <h5>Tutorial Video</h5>
-                        <div>
-                            <a href="<%= contUrl %>" />
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-toggle="modal" data-target="#overviewModal" onclick="showCourseOverview(<%= courseid %>)">
+                        <div class="course-item course-effect">
+                            <img src='<%= imgpath %>' class="img-fluid" alt="...">
+                            <div class="course-content">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4><%= category %></h4>
+                                    <p class="price">$<%= rate %></p>
+                                </div>
+                                <h3><a href="#"><%= title %></a></h3>
+                                <p><%= limitText %></p>
+                                <div class="trainer d-flex justify-content-between align-items-center">
+                                    <div class="trainer-profile d-flex align-items-center">
+                                        <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
+                                        <span><%= instructor %></span>
+                                    </div>
+                                    <div class="trainer-rank d-flex align-items-center">
+                                        <i class="bx bx-user"></i>&nbsp;50
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;65
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <%
-                            }
-                        %>
-
-
-                        <%--resource File--%>
-                        <%
-                            if (contFile != null)
-                            {
-                        %>
-                        <a class="btn btn-primary" href="<%= contFile %>">Resouce File</a>
-
-                        <%
-                            }
-                        %>
                     </div>
+                    <!-- End Course Item-->
+
                     <%
-                            index++;
+
                         }
                     %>
+                </div>
+            </div>
+        </section>
+        <!-- End Courses Section -->
+    </main>
+    <!-- End #main -->
+
+    <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
+
+
+    <!-- Modal -->
+    <asp:ScriptManager runat="server" />
+
+    <div class="modal fade" id="overviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog mw-100 w-50" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header mb-2 bg-info text-white">
+                    <h4 class="modal-title" id="exampleModalLongTitle">
+
+                        <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
+                    </h4>
+                    <p class="btn btn-sm p-3 mb-2 bg-success text-white">Price: $
+                        <asp:Label ID="lblPrice" runat="server" Text=""></asp:Label></p>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="hideModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <asp:Button ID="btnEnrollCourse" class="btn btn-primary btn-lg mb-2 " runat="server" Text="Enroll Now" OnClick="btnEnrollCourse_Click" />
+
+                    <h4 class="mb-2">About this Course</h4>
+                    <p style="font-size: 1rem;" class="text-dark">
+
+                        <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label>
+
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <%--    <%
-        List<object[]> dataList = (List<object[]>)ViewState["ContentData"];
-        for (int i = 0; i < dataList.Count; i++)
-        {
-    %>
-    <div>
-        ID: <%= dataList[i][0] %>
-            Cont Title: <%= dataList[i][1] %>
-    </div>
-    <%
+    <script>
+        function showCourseOverview(arg) {
+            __doPostBack('', arg);
         }
-    %>--%>
+        function hideModal() {
 
-
-
-
-    <%--    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <%
-                        List<object[]> dataList = (List<object[]>)ViewState["ContentData"];
-                        for (int i = 0; i < dataList.Count; i++)
-                        {
-                    %>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><%= dataList[i][1] %></a>
-                    <%
-                        }
-                    %>
-                </div>
-            </div>
-            <div class="col-9">
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">1</div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2</div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">3</div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">4</div>
-                </div>
-            </div>
-        </div>
-    </div>--%>
+            $('#overviewModal').modal('hide')
+        }
+    </script>
 </asp:Content>
-

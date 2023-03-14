@@ -26,18 +26,19 @@
                         <img src="assets/img/about.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                        
+
                         <p class="fst-italic">
-                            <h1 style="color:mediumaquamarine; font-weight:bold"> LOOKING FOR YOUR DESIRED COURSE?</h1>
+                            <h1 style="color: mediumaquamarine; font-weight: bold">LOOKING FOR YOUR DESIRED COURSE?</h1>
                         </p>
                         <ul>
                             <h3>
-                            <li><i class="bi bi-check-circle"></i>Learn from Professionals.</li>
-                            <li><i class="bi bi-check-circle"></i>Competitive with people all around the globe.</li>
-                            <li><i class="bi bi-check-circle"></i>Get preofessional certificate of the completed courses.</li> </h3>
+                                <li><i class="bi bi-check-circle"></i>Learn from Professionals.</li>
+                                <li><i class="bi bi-check-circle"></i>Competitive with people all around the globe.</li>
+                                <li><i class="bi bi-check-circle"></i>Get preofessional certificate of the completed courses.</li>
+                            </h3>
                         </ul>
                         <p>
-                           <h4> Start learning the courses according to your time flexibility and your pace. Start today, enroll and obtain all the creative skills you to achieve your goals in terms of personal and career path. Connect to the global community. Expland networks.</h4>
+                            <h4>Start learning the courses according to your time flexibility and your pace. Start today, enroll and obtain all the creative skills you to achieve your goals in terms of personal and career path. Connect to the global community. Expland networks.</h4>
                         </p>
 
                     </div>
@@ -54,23 +55,18 @@
                 <div class="row counters">
 
                     <div class="col-lg-3 col-6 text-center">
-                        <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="<%= ViewState["ins_count"].ToString() %>" data-purecounter-duration="1" class="purecounter"></span>
+                        <p>Instructors</p>
+                    </div>
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-purecounter-start="0" data-purecounter-end="<%= ViewState["std_count"].ToString() %>" data-purecounter-duration="1" class="purecounter"></span>
                         <p>Students</p>
                     </div>
 
                     <div class="col-lg-3 col-6 text-center">
-                        <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="<%= ViewState["CoursesCount"].ToString() %>" data-purecounter-duration="1" class="purecounter"></span>
                         <p>Courses</p>
-                    </div>
-
-                    <div class="col-lg-3 col-6 text-center">
-                        <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
-                        <p>Events</p>
-                    </div>
-
-                    <div class="col-lg-3 col-6 text-center">
-                        <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                        <p>Trainers</p>
                     </div>
 
                 </div>
@@ -116,7 +112,7 @@
                                     <div class="icon-box mt-4 mt-xl-0">
                                         <i class="bx bx-images"></i>
                                         <h4>See yourself in bigger picture</h4>
-                                        <p> Do not wait for the perfect time. Start today and see yourself in the position of your dreams.</p>
+                                        <p>Do not wait for the perfect time. Start today and see yourself in the position of your dreams.</p>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +147,7 @@
                     <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
                         <div class="icon-box">
                             <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-                            <h3><a href=""> Project Management </a></h3>
+                            <h3><a href="">Project Management </a></h3>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
