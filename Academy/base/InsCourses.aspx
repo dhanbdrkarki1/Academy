@@ -8,9 +8,9 @@
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs" data-aos="fade-in">
             <div class="container">
-                <h2><b>Contact Us </b></h2>
+                <h2><b>Instructor Courses </b></h2>
                 <p>
-                    <h4>Connect with us and be the first one to get all the exciting offers and courses information. </h4>
+                    <h4>Know about the courses taught by the instructor. </h4>
                 </p>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         {
                     %>
 
-                    <h3>No Coourses Available!</h3>
+                    <h3>No Courses Available!</h3>
 
                     <% 
 
