@@ -75,7 +75,7 @@ namespace Academy.@base
 
         protected void btnCompleteOrder_Click(object sender, EventArgs e)
         {
-            string courseId = Request.QueryString["CourseId"];
+            string courseId = Request.QueryString["courseId"];
             string stuId = Request.QueryString["StuId"];
             Utils uObj = new Utils();
 
@@ -113,7 +113,7 @@ namespace Academy.@base
                 string accType = uObj.getSpecificData(stuId, accountQuery, "AccountType");
                 if(accType == "Student")
                 {
-                    Response.Redirect("../student/Student.aspx");
+                    Response.Redirect("../student/MyCourses.aspx");
                 }
                 else
                 {

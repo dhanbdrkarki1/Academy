@@ -58,7 +58,7 @@ namespace Academy
                             }
                             else
                             {
-                                Response.Redirect("../student/Student.aspx");
+                                Response.Redirect("../student/MyCourses.aspx");
 
                             }
                         }

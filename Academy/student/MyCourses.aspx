@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="StudentPage.Master" AutoEventWireup="true" CodeBehind="Student.aspx.cs" Inherits="Academy.WebForm10" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="StudentPage.Master" AutoEventWireup="true" CodeBehind="MyCourses.aspx.cs" Inherits="Academy.WebForm10" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -20,7 +20,7 @@
 
                 <div class="row" data-aos="zoom-in" data-aos-delay="100">
            <%
-               List<object[]> contentData = (List<object[]>)ViewState["CData"];
+               List<object[]> contentData = (List<object[]>)ViewState["MyCoursesData"];
                foreach (object[] data in contentData)
                {
                    string courseid = data[0].ToString();

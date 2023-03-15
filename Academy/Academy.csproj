@@ -161,7 +161,7 @@
     <Content Include="base\About.aspx" />
     <Content Include="instructor\InstructorCourses.aspx" />
     <Content Include="instructor\ViewEnrollment.aspx" />
-    <Content Include="student\Student.aspx" />
+    <Content Include="student\MyCourses.aspx" />
     <Content Include="admin\Admin.aspx" />
     <Content Include="instructor\InstructorProfile.aspx" />
     <Content Include="instructor\InstructorCourseContentUpdate.aspx" />
@@ -324,12 +324,12 @@
     <Compile Include="instructor\ViewEnrollment.aspx.designer.cs">
       <DependentUpon>ViewEnrollment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="student\Student.aspx.cs">
-      <DependentUpon>Student.aspx</DependentUpon>
+    <Compile Include="student\MyCourses.aspx.cs">
+      <DependentUpon>MyCourses.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="student\Student.aspx.designer.cs">
-      <DependentUpon>Student.aspx</DependentUpon>
+    <Compile Include="student\MyCourses.aspx.designer.cs">
+      <DependentUpon>MyCourses.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\Admin.aspx.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
