@@ -218,9 +218,7 @@
                     <h2>Courses</h2>
                     <p>Popular Courses</p>
                 </div>
-
                 <div class="row" data-aos="zoom-in" data-aos-delay="100">
-
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                         <div class="course-item">
                             <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
