@@ -15,6 +15,15 @@ namespace Academy.student
     {
 
         /// <summary>
+        /// lblMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsg;
+
+        /// <summary>
         /// lblTitle control.
         /// </summary>
         /// <remarks>
@@ -33,13 +42,13 @@ namespace Academy.student
         protected global::System.Web.UI.WebControls.Label lblPrice;
 
         /// <summary>
-        /// Button1 control.
+        /// btnAvailEnrollCourse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnAvailEnrollCourse;
 
         /// <summary>
         /// lblDescription control.

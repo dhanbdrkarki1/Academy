@@ -89,7 +89,9 @@ namespace Academy
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
+
                 cmd.Parameters.AddWithValue("@id", searchBy);
+                System.Diagnostics.Debug.WriteLine("error: " + cmd);
                 SqlDataReader sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -105,7 +107,7 @@ namespace Academy
         }
 
 
-        // takes query and use it to retrieve/insert/delete data using params from db
+        // takes query and use it to retrieve/insert/delete data  from db
         public SqlDataReader DbAction(string query, SqlParameter[] param = null)
         {
             SqlConnection con = new SqlConnection(connectionString);
@@ -120,27 +122,25 @@ namespace Academy
                     cmd.Parameters.AddRange(param);
                     try
                     {
+                        System.Diagnostics.Debug.WriteLine("passed................");
                         return cmd.ExecuteReader();
                     }
                     catch (SqlException ex)
                     {
                         System.Diagnostics.Debug.WriteLine(ex.Message);
                     }
-                    System.Diagnostics.Debug.WriteLine("passed................");
                 }
 
                 // executing query with no parameters
                 try
                 {
+
                     return cmd.ExecuteReader();
                 }
                 catch (SqlException ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
-
-
-
             }
             catch (Exception ex)
             {

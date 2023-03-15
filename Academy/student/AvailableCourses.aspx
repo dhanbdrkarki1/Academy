@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="StudentPage.Master" AutoEventWireup="true" CodeBehind="AvailableCourses.aspx.cs" Inherits="Academy.student.WebForm1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -20,24 +21,27 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <mainid="main" data-aos="fade-in">
+    <main id="main" data-aos="fade-in">
 
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
             <div class="container">
-                <h2><b> Courses </b> </h2>
-                <p> <h4> Learn the in-demand professional skills from the experts. Explore courses and get enrolled today.</h4> </p>
+                <h2><b>Courses </b></h2>
+                <p>
+                    <h4>Learn the in-demand professional skills from the experts. Explore courses and get enrolled today.</h4>
+                </p>
             </div>
         </div>
         <!-- End Breadcrumbs -->
 
-          <!-- ======= Courses Section ======= -->
+
+        <!-- ======= Courses Section ======= -->
         <section id="courses" class="courses">
             <div class="container" data-aos="fade-up">
                 <div class="row mb-4" data-aos="zoom-in" data-aos-delay="100">
 
                     <%
-                        List<object[]> contentData = (List<object[]>)ViewState["CData"];
+                        List<object[]> contentData = (List<object[]>)ViewState["AvailableCoursesData"];
                         foreach (object[] data in contentData)
                         {
                             string courseid = data[0].ToString();
@@ -95,7 +99,17 @@
                 </div>
             </div>
         </section>
-     <div class="modal fade" id="overviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <!-- End Courses Section -->
+    </main>
+    <!-- End #main -->
+
+    <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
+
+
+    <!-- Modal -->
+    <asp:ScriptManager runat="server" />
+
+    <div class="modal fade" id="overviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog mw-100 w-50" role="document">
             <div class="modal-content">
 
@@ -104,8 +118,10 @@
 
                         <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
                     </h4>
-                    <p class="btn btn-sm p-3 mb-2 bg-success text-white">Price: $
-                        <asp:Label ID="lblPrice" runat="server" Text=""></asp:Label></p>
+                    <p class="btn btn-sm p-3 mb-2 bg-success text-white">
+                        Price: $
+                        <asp:Label ID="lblPrice" runat="server" Text=""></asp:Label>
+                    </p>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="hideModal()">
                         <span aria-hidden="true">&times;</span>
@@ -113,8 +129,8 @@
 
                 </div>
                 <div class="modal-body">
-                    <%--<asp:Button ID="btnC" class="btn btn-primary btn-lg mb-2 " runat="server" Text="Enroll Now" OnClick="btnC_Click" />--%>
-                    <asp:Button ID="Button1" runat="server" Text="Enroll now" OnClick="Button1_Click" />
+                    <asp:Button ID="btnAvailEnrollCourse" class="btn btn-primary btn-lg mb-2 " runat="server" Text="Enroll Now" OnClick="btnAvailEnrollCourse_Click" />
+
                     <h4 class="mb-2">About this Course</h4>
                     <p style="font-size: 1rem;" class="text-dark">
 
@@ -125,5 +141,14 @@
             </div>
         </div>
     </div>
-    </main>
+
+    <script>
+        function showCourseOverview(arg) {
+            __doPostBack('', arg);
+        }
+        function hideModal() {
+
+            $('#overviewModal').modal('hide')
+        }
+    </script>
 </asp:Content>

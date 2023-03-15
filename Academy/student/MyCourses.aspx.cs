@@ -33,57 +33,38 @@ namespace Academy
         }
 
 
-        //void showOverView()
-        //{
-        //    string script = "$(document).ready(function () { $('#overviewModal').modal('show'); });";
-        //    Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", script, true);
-        //    string courseId = Request.Params["__EVENTARGUMENT"];
-
-        //    List<object[]> courseData = (List<object[]>)ViewState["CData"];
-
-
-        //    foreach (object[] data in courseData)
-        //    {
-        //        int cid = Convert.ToInt32(data[0]);
-        //        string title = data[1].ToString();
-        //        string category = data[2].ToString();
-        //        string overview = data[3].ToString();
-        //        string rate = data[4].ToString();
-        //        string imgpath = data[5].ToString();
-        //        if (imgpath == "")
-        //        {
-        //            imgpath = "~/Images/Profile/user.png";
-        //        }
-        //        imgpath = Page.ResolveUrl(imgpath);
-        //        string instructor = data[6].ToString();
-        //        if (courseId == cid.ToString())
-        //        {
-        //            ViewState["courseId"] = cid;
-        //            lblTitle.Text = title;
-        //            lblDescription.Text = overview;
-        //            lblPrice.Text = rate;
-
-        //        }
-
-        //    }
-        //}
-
         void retrieveData()
         {
-            string courses = "select * from EnrollCourse where StudentId=@id";
-            string query = "select * from Courses";
             string accountQuery = "select * from UserAccount where AccountId=@id";
             string categoryQuery = "select * from CourseCategory where CourseCatId=@id";
             string imageQuery = "select top 1 * from CourseContent where CId=@id";
 
-            Utils uObj = new Utils();
+            string EnrolledCourseQuery = "SELECT Courses.CourseId, Courses.Title, Courses.Category, Courses.Overview, Courses.InstructorId FROM EnrollCourse " +
+                "INNER JOIN Courses ON EnrollCourse.CourseId = Courses.CourseId " +
+                "WHERE EnrollCourse.StudentId = @sid";
 
-            SqlConnection con = new SqlConnection(connectionString);
+            Utils uObj = new Utils();
+            string username = Session["username"].ToString();
+            System.Diagnostics.Debug.WriteLine("heyyyyyy....", username);
+            string stuId = uObj.getSpecificData(username, accountQuery, "FullName");
+            System.Diagnostics.Debug.WriteLine("heyyyyyy....", stuId);
+
+            SqlParameter sid = new SqlParameter("@sid", SqlDbType.Int);
+            sid.Value = Convert.ToInt32(stuId);
+
+            SqlParameter[] parameters = { sid };
+
             try
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand(query, con);
-                SqlDataReader sdr = cmd.ExecuteReader();
+                SqlDataReader sdr = uObj.DbAction(EnrolledCourseQuery, parameters);
+                if(sdr.HasRows)
+                {
+                    System.Diagnostics.Debug.WriteLine("heyyyyyy....contain data");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("heyyyyyy....no data");
+                }
 
                 // Read the data and store it in the ViewState
                 List<object[]> dataList = new List<object[]>();
@@ -92,18 +73,19 @@ namespace Academy
                 while (sdr.Read())
                 {
                     object[] data = new object[7];
-                    data[0] = sdr["Courseid"];
+                    data[0] = sdr["CourseId"];
                     data[1] = sdr["Title"];
                     data[2] = uObj.getSpecificData(sdr["Category"].ToString(), categoryQuery, "Category");
                     data[3] = sdr["OverView"];
-                    data[5] = uObj.getSpecificData(sdr["Courseid"].ToString(), imageQuery, "ImageCont");
+                    data[5] = uObj.getSpecificData(sdr["CourseId"].ToString(), imageQuery, "ImageCont");
                     data[6] = uObj.getSpecificData(sdr["Instructorid"].ToString(), accountQuery, "FullName");
                     idList.Add(data[0].ToString());
+                    System.Diagnostics.Debug.WriteLine("heyyyyyy....", data[0]);
 
                     dataList.Add(data);
                 }
                 sdr.Close();
-                ViewState["CData"] = dataList;
+                ViewState["MyCoursesData"] = dataList;
             }
             catch (Exception ex)
             {
