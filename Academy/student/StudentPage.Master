@@ -45,6 +45,7 @@
                                 <li><a href="CoursesDetail.aspx">Courses</a></li>
                                 <li><a class="active" href="Student.aspx">My Courses</a></li>
                                 <li><a href="StudentProfile.aspx">My Profile</a></li>
+                                <li><a href="AvailableCourses.aspx">C#</a></li>
 
                             </ul>
                             <i class="bi bi-list mobile-nav-toggle"></i>

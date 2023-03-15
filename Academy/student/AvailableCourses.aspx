@@ -1,6 +1,4 @@
-﻿
-<%@ Page Title="Courses" Language="C#" MasterPageFile="Studentpage.Master" AutoEventWireup="true" CodeBehind="Courses.aspx.cs" Inherits="Academy.Student.WebForm2" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="StudentPage.Master" AutoEventWireup="true" CodeBehind="AvailableCourses.aspx.cs" Inherits="Academy.student.WebForm1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -22,8 +20,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <main id="main" data-aos="fade-in">
+    <mainid="main" data-aos="fade-in">
 
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
@@ -34,8 +31,7 @@
         </div>
         <!-- End Breadcrumbs -->
 
-
-        <!-- ======= Courses Section ======= -->
+          <!-- ======= Courses Section ======= -->
         <section id="courses" class="courses">
             <div class="container" data-aos="fade-up">
                 <div class="row mb-4" data-aos="zoom-in" data-aos-delay="100">
@@ -99,17 +95,7 @@
                 </div>
             </div>
         </section>
-        <!-- End Courses Section -->
-    </main>
-    <!-- End #main -->
-
-    <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
-
-
-    <!-- Modal -->
-    <asp:ScriptManager runat="server" />
-
-    <div class="modal fade" id="overviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+     <div class="modal fade" id="overviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog mw-100 w-50" role="document">
             <div class="modal-content">
 
@@ -127,8 +113,8 @@
 
                 </div>
                 <div class="modal-body">
-                    <asp:Button ID="btnCourseEnroll" class="btn btn-primary btn-lg mb-2 " runat="server" Text="Enroll Now" OnClick="btnCourseEnroll_Click" />
-
+                    <%--<asp:Button ID="btnC" class="btn btn-primary btn-lg mb-2 " runat="server" Text="Enroll Now" OnClick="btnC_Click" />--%>
+                    <asp:Button ID="Button1" runat="server" Text="Enroll now" OnClick="Button1_Click" />
                     <h4 class="mb-2">About this Course</h4>
                     <p style="font-size: 1rem;" class="text-dark">
 
@@ -139,14 +125,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function showCourseOverview(arg) {
-            __doPostBack('', arg);
-        }
-        function hideModal() {
-
-            $('#overviewModal').modal('hide')
-        }
-    </script>
+    </main>
 </asp:Content>

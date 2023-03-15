@@ -7,21 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Academy.Student
+namespace Academy.student
 {
 
 
-    public partial class WebForm2
+    public partial class WebForm1
     {
-
-        /// <summary>
-        /// lblMsg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
         /// lblTitle control.
@@ -42,13 +33,13 @@ namespace Academy.Student
         protected global::System.Web.UI.WebControls.Label lblPrice;
 
         /// <summary>
-        /// btnCourseEnroll control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCourseEnroll;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
         /// lblDescription control.

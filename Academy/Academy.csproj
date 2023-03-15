@@ -152,6 +152,7 @@
     <Content Include="base\SignUp.aspx" />
     <Content Include="student\CoursesDetail.aspx" />
     <Content Include="student\StudentProfile.aspx" />
+    <Content Include="student\AvailableCourses.aspx" />
     <Content Include="Web.config" />
     <Content Include="base\Index.aspx" />
     <Content Include="base\Courses.aspx" />
@@ -306,6 +307,13 @@
     </Compile>
     <Compile Include="student\StudentProfile.aspx.designer.cs">
       <DependentUpon>StudentProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\AvailableCourses.aspx.cs">
+      <DependentUpon>AvailableCourses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\AvailableCourses.aspx.designer.cs">
+      <DependentUpon>AvailableCourses.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Utils.cs" />
