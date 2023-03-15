@@ -42,6 +42,7 @@ namespace Academy
             string ciq = "select count(*) as InstructorCount from UserAccount where AccountType=@it";
             string siq = "select count(*) as StudentCount from UserAccount where AccountType=@st";
             string coriq = "select count(*) as CoursesCount from Courses";
+
             string popularquery = "SELECT TOP 3 c.CourseId, c.Title, c.Category, c.OverView, c.Rate, c.InstructorId, COUNT(ec.CourseID) AS EnrollmentCount FROM Courses AS c.INNER JOIN EnrollCourse AS ec ON c.CourseID = ec.CourseID " +
                 "GROUP BY c.CourseId, c.Title, c.Category, c.OverView, c.Rate, c.InstructorId" +
                 "ORDER BY EnrollmentCount DESC";
@@ -49,17 +50,13 @@ namespace Academy
             string categoryQuery = "select * from CourseCategory where CourseCatId=@id";
             string imageQuery = "select top 1 * from CourseContent where CId=@id";
             Utils uObj = new Utils();
-           
+
             SqlConnection con = new SqlConnection(connectionString);
             try
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(coriq, con);
                 SqlDataReader sdr = cmd.ExecuteReader();
-                SqlCommand cmd1 = new SqlCommand(popularquery, con);
-                SqlDataReader sdr1 = cmd.ExecuteReader();
-
-
                 while (sdr.Read())
                 {
 
@@ -68,6 +65,9 @@ namespace Academy
 
                 }
                 sdr.Close();
+
+                SqlCommand cmd1 = new SqlCommand(popularquery, con);
+                SqlDataReader sdr1 = cmd1.ExecuteReader();
 
                 List<object[]> dataList = new List<object[]>();
                 List<string> idList = new List<string>();
@@ -93,6 +93,7 @@ namespace Academy
                 System.Diagnostics.Debug.WriteLine("Something went wrong.: " + ex.Message);
             }
 
+            //couting instructor and student
             SqlParameter it = new SqlParameter("@it", SqlDbType.Char);
             it.Value = "Instructor";
 
@@ -101,7 +102,7 @@ namespace Academy
 
             SqlParameter[] p1 = { it };
             SqlParameter[] s1 = { st };
-             
+
             SqlDataReader instructor_sdr = uObj.DbAction(ciq, p1);
 
             SqlDataReader student_sdr = uObj.DbAction(siq, s1);
