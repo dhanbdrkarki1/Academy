@@ -28,6 +28,7 @@
 
 
                             <%
+                                   
                                 List<object[]> enrollmentData = (List<object[]>)ViewState["EnrollmentData"];
 
                                 foreach (object[] data in enrollmentData)

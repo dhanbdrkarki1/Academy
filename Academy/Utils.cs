@@ -97,6 +97,8 @@ namespace Academy
                 {
                     result = sdr[column].ToString();
                 }
+                System.Diagnostics.Debug.WriteLine("specific data passed....");
+
                 return result;
             }
             catch (Exception ex)

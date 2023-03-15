@@ -27,7 +27,8 @@ namespace Academy
             }
             if (IsPostBack)
             {
-                //showOverView();
+                redirectToCourseContent();
+
             }
 
         }
@@ -35,6 +36,7 @@ namespace Academy
 
         void retrieveData()
         {
+            string userQuery = "select * from UserAccount where Username=@id";
             string accountQuery = "select * from UserAccount where AccountId=@id";
             string categoryQuery = "select * from CourseCategory where CourseCatId=@id";
             string imageQuery = "select top 1 * from CourseContent where CId=@id";
@@ -45,9 +47,7 @@ namespace Academy
 
             Utils uObj = new Utils();
             string username = Session["username"].ToString();
-            System.Diagnostics.Debug.WriteLine("heyyyyyy....", username);
-            string stuId = uObj.getSpecificData(username, accountQuery, "FullName");
-            System.Diagnostics.Debug.WriteLine("heyyyyyy....", stuId);
+            string stuId = uObj.getSpecificData(username, userQuery, "AccountId");
 
             SqlParameter sid = new SqlParameter("@sid", SqlDbType.Int);
             sid.Value = Convert.ToInt32(stuId);
@@ -57,15 +57,6 @@ namespace Academy
             try
             {
                 SqlDataReader sdr = uObj.DbAction(EnrolledCourseQuery, parameters);
-                if(sdr.HasRows)
-                {
-                    System.Diagnostics.Debug.WriteLine("heyyyyyy....contain data");
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("heyyyyyy....no data");
-                }
-
                 // Read the data and store it in the ViewState
                 List<object[]> dataList = new List<object[]>();
                 List<string> idList = new List<string>();
@@ -80,12 +71,80 @@ namespace Academy
                     data[5] = uObj.getSpecificData(sdr["CourseId"].ToString(), imageQuery, "ImageCont");
                     data[6] = uObj.getSpecificData(sdr["Instructorid"].ToString(), accountQuery, "FullName");
                     idList.Add(data[0].ToString());
-                    System.Diagnostics.Debug.WriteLine("heyyyyyy....", data[0]);
 
                     dataList.Add(data);
                 }
                 sdr.Close();
                 ViewState["MyCoursesData"] = dataList;
+                System.Diagnostics.Debug.WriteLine("Retreiving completed....");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("My courses page error:" + ex.Message);
+            }
+        }
+
+
+        // redirecting to course content
+        void redirectToCourseContent()
+        {
+            System.Diagnostics.Debug.WriteLine("before redreicting course id lol....: ");
+            string courseId = Request.Params["__EVENTARGUMENT"];
+            System.Diagnostics.Debug.WriteLine("before redreicting course id....: " + courseId);
+            retrieveCourseContentData(courseId);
+            System.Diagnostics.Debug.WriteLine("now redreicting....");
+            Response.Redirect("CoursesDetail.aspx");
+
+        }
+
+        void retrieveCourseContentData(string userCourseId)
+        {
+            int courseId = Convert.ToInt32(userCourseId);
+            string userQuery = "select * from UserAccount where Username=@id";
+            string courseContentQuery = "select * from CourseContent where  Cid=@courseContentId";
+
+
+            Utils uObj = new Utils();
+            string username = Session["username"].ToString();
+            System.Diagnostics.Debug.WriteLine("heyyyyyy....", username);
+            string stuId = uObj.getSpecificData(username, userQuery, "AccountId");
+            System.Diagnostics.Debug.WriteLine("heyyyyyy....", stuId);
+
+            SqlParameter cccid = new SqlParameter("@courseContentId", SqlDbType.Int);
+            cccid.Value = Convert.ToInt32(stuId);
+
+            SqlParameter[] parameters = { cccid };
+
+            try
+            {
+                SqlDataReader sdr = uObj.DbAction(courseContentQuery, parameters);
+
+                // Read the data and store it in the ViewState
+                List<object[]> dataList = new List<object[]>();
+
+                while (sdr.Read())
+                {
+                    object[] data = new object[8];
+                    data[0] = sdr["CourseContentId"];
+                    data[1] = sdr["Cid"];
+                    data[2] = sdr["ContTitle"];
+                    data[3] = sdr["TextContent"];
+                    data[4] = sdr["FileContent"];
+                    data[6] = sdr["ContentUrl"];
+                    dataList.Add(data);
+                }
+                sdr.Close();
+                ViewState["MyCoursesContentData"] = dataList;
+                if (ViewState["MyCoursesContentData"] != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("i'm hereeeee babe....");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("oh.. no please bye bye....");
+                }
+
+                System.Diagnostics.Debug.WriteLine("Retreiving content completed....");
             }
             catch (Exception ex)
             {
@@ -95,21 +154,6 @@ namespace Academy
 
 
 
-        protected void btnEnrollCourse_Click(object sender, EventArgs e)
-        {
-            string courseId = ViewState["courseId"].ToString();
-
-            if (User.Identity.IsAuthenticated)
-            {
-                // The user is logged in, so redirect them to the checkout page.
-                Response.Redirect("Checkout.aspx?courseId=" + courseId);
-            }
-            else
-            {
-                // The user is not logged in, so redirect them to the login page.
-                Response.Redirect("Login.aspx?redirectUrl=Checkout.aspx" + "&CourseId=" + courseId);
-            }
-        }
     }
 
 }

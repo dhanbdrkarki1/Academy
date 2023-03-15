@@ -150,9 +150,10 @@
     <Content Include="Images\Profile\user.png" />
     <Content Include="base\Login.aspx" />
     <Content Include="base\SignUp.aspx" />
-    <Content Include="student\CoursesDetail.aspx" />
+    <Content Include="student\hwa.aspx" />
     <Content Include="student\StudentProfile.aspx" />
     <Content Include="student\AvailableCourses.aspx" />
+    <Content Include="student\CoursesDetail.aspx" />
     <Content Include="Web.config" />
     <Content Include="base\Index.aspx" />
     <Content Include="base\Courses.aspx" />
@@ -294,12 +295,12 @@
     <Compile Include="student\StudentPage.Master.designer.cs">
       <DependentUpon>StudentPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="student\CoursesDetail.aspx.cs">
-      <DependentUpon>CoursesDetail.aspx</DependentUpon>
+    <Compile Include="student\hwa.aspx.cs">
+      <DependentUpon>hwa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="student\CoursesDetail.aspx.designer.cs">
-      <DependentUpon>CoursesDetail.aspx</DependentUpon>
+    <Compile Include="student\hwa.aspx.designer.cs">
+      <DependentUpon>hwa.aspx</DependentUpon>
     </Compile>
     <Compile Include="student\StudentProfile.aspx.cs">
       <DependentUpon>StudentProfile.aspx</DependentUpon>
@@ -314,6 +315,13 @@
     </Compile>
     <Compile Include="student\AvailableCourses.aspx.designer.cs">
       <DependentUpon>AvailableCourses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\CoursesDetail.aspx.cs">
+      <DependentUpon>CoursesDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\CoursesDetail.aspx.designer.cs">
+      <DependentUpon>CoursesDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Utils.cs" />

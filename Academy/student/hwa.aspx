@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/student/StudentPage.Master" AutoEventWireup="true" CodeBehind="CoursesDetail.aspx.cs" Inherits="Academy.student.WebForm3" %>
+﻿<%@ Page Title="Courses" Language="C#" MasterPageFile="Studentpage.Master" AutoEventWireup="true" CodeBehind="hwa.aspx.cs" Inherits="Academy.Student.CourseDetail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
@@ -11,7 +11,9 @@
             $(this).tab('show')
         })
     </script>
+
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <main id="main" data-aos="fade-in">
 
@@ -163,8 +165,6 @@
         </div>
     </div>--%>
 </asp:Content>
-
-
 
 
 

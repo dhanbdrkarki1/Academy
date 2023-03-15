@@ -228,6 +228,30 @@ namespace Academy
         protected void gvManageCourse_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             String query = "DELETE from Courses where CourseID=@id";
+            string dCourseContent = "DELETE FROM CourseContent WHERE Cid = @ccid";
+            string dEnrollContent = "DELETE FROM EnrollCourse WHERE CourseId = @ecid";
+
+            Utils uObj = new Utils();
+            int id = Convert.ToInt32(gvManageCourse.DataKeys[e.RowIndex].Value.ToString());
+            SqlParameter ccid = new SqlParameter("@ccid", SqlDbType.Int);
+            ccid.Value = id;
+            SqlParameter ecid = new SqlParameter("@ecid", SqlDbType.Int);
+            ecid.Value = id;
+
+            SqlParameter[] parameters1 = { ccid };
+            SqlParameter[] params2 = { ecid };
+
+            // deleting from course content
+            System.Diagnostics.Debug.WriteLine("courses.....lau maryo");
+            uObj.DbAction(dCourseContent, parameters1);
+            // deleting from enroll content 
+            uObj.DbAction(dEnrollContent, params2);
+            System.Diagnostics.Debug.WriteLine("courses.....hawa");
+            
+
+
+
+
             SqlConnection con = new SqlConnection(connectionString);
             try
             {

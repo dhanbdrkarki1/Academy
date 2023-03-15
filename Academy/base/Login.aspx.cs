@@ -116,7 +116,7 @@ namespace Academy
             string acQuery = "select AccountId from UserAccount where username=@id";
             try
             {
-                stuId = uObj.getSpecificData("Username", acQuery, "AccountId");
+                stuId = uObj.getSpecificData(username, acQuery, "AccountId");
             }
             catch
             {

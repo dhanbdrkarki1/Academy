@@ -58,7 +58,7 @@
 
                 <div class="row">
                     <div class="col-md-8  mx-auto">
-                        <button class="btn btn-secondary float-left" type="button">Go to Dashboard</button>
+                        <a class="btn btn-secondary float-left" href="Courses.aspx">Go to Dashboard</a>
                         <asp:Button ID="btnCompleteOrder" class="btn btn-success float-right" runat="server" Text="Complete Order" OnClick="btnCompleteOrder_Click" />
                     </div>
                 </div>

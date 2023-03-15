@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
+using System.Web.UI.HtmlControls;
+using System.IO;
+using System.Configuration;
+using System.Data.SqlTypes;
 
 namespace Academy.student
 {
-    public partial class WebForm3 : System.Web.UI.Page
+    public partial class CourseDetail : System.Web.UI.Page
     {
+        string connectionString = WebConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                System.Diagnostics.Debug.WriteLine("i'm normal....");
-                if (ViewState["MyCoursesContentData"] != null)
+                if(ViewState["MyCoursesContentData"] != null)
                 {
                     System.Diagnostics.Debug.WriteLine("i'm hereeeee....");
                 }
@@ -24,5 +32,6 @@ namespace Academy.student
                 }
             }
         }
+
     }
 }
