@@ -39,7 +39,7 @@
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
             <div class="container">
-                <h2>Mana</h2>
+                <h2>Manage Users</h2>
                 <p>Add more courses to earn more. The more courses you add, the more rich you go So hurry up and add more content.</p>
             </div>
         </div>
@@ -68,8 +68,7 @@
 
 
                 <asp:GridView ID="gvManageUserAccount" runat="server" AutoGenerateColumns="false" DataKeyNames="AccountId" ShowHeaderWhenEmpty="true"
-                    OnRowEditing="gvManageUserAccount_RowEditing" OnRowCancelingEdit="gvManageUserAccount_RowCancelingEdit" OnRowUpdating="gvManageUserAccount_RowUpdating"
-                    OnRowDeleting="gvManageUserAccount_RowDeleting" OnRowDataBound="gvManageUserAccount_RowDataBound" class="table table-striped table-hover">
+                    class="table table-striped table-hover">
 
                     <Columns>
                         <asp:TemplateField HeaderText="Account ID">
@@ -127,12 +126,14 @@
                         <asp:CommandField ButtonType="Link" HeaderText="Account Actions" ShowEditButton="true" ShowDeleteButton="true" />
                     </Columns>
                 </asp:GridView>
+
                 <br />
                 <asp:Label ID="lblSuccess" runat="server" Text="" ForeColor="Green"></asp:Label>
                 <br />
                 <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
 
                 <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:dbconnection %>" SelectCommand="SELECT * FROM [UserAccount]" UpdateCommand="update UserAccount set FullName=@FullName,Email=@Email,Username=@Username, AccountType=@AccountType,Profile_Img='' where AccountId=@AccountId" DeleteCommand="Delete from UserAccount where AccountId=@AccountId"></asp:SqlDataSource>
+
             </div>
         </div>
 

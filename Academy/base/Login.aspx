@@ -34,9 +34,7 @@
                             <asp:TextBox ID="Password" class="form-control form-control-lg" runat="server" TextMode="Password"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field is required." ValidationGroup="vl" ForeColor="#CC3300" ControlToValidate="Password" Display="Dynamic"></asp:RequiredFieldValidator>
                         </div>
 
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#!" class="text-body">Forgot password?</a>
-                        </div>
+
 
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <asp:Button ID="btnLogin" runat="server" class="btn btn-primary btn-lg"
@@ -47,6 +45,10 @@
                             <p class="small fw-bold mt-2 pt-1 mb-0">
                                 Don't have an account? <a href="SignUp.aspx"
                                     class="info">Register</a>
+                            </p>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">
+                                Go back to home <a href="Index.aspx"
+                                    class="info">Home</a>
                             </p>
                         </div>
 

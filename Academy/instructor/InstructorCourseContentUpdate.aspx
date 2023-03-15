@@ -23,8 +23,8 @@
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
             <div class="container">
-                <h2>Your Content</h2>
-                <p>Add more courses to earn more. The more courses you add, the more rich you go So hurry up and add more content.</p>
+                <h2>Select content to Update 👇</h2>
+
             </div>
         </div>
         <!-- End Breadcrumbs -->
@@ -32,6 +32,15 @@
 
         <section id="features" class="features mt-5">
             <div class="container">
+                <%--shows alert on update--%>
+                <% if (ViewState["contMsg"] != null)
+                    { %>
+                <div class="alert alert-success" role="alert" id="myAlert">
+                    <%=ViewState["contMsg"].ToString() %>
+                </div>
+                <% } %>
+
+
                 <div class="row" data-aos="zoom-in" data-aos-delay="100">
 
                     <%
@@ -86,7 +95,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Image:"></asp:Label>
                         <asp:FileUpload ID="ftImage" class="form-control" runat="server" />
-                        <asp:Label ID="iPath" runat="server" style="display: none;"></asp:Label>
+                        <asp:Label ID="iPath" runat="server" Style="display: none;"></asp:Label>
 
                     </div>
                     <div class="form-group">
@@ -97,7 +106,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Attach Resource File:"></asp:Label>
                         <asp:FileUpload ID="ftFile" class="form-control" runat="server" />
-                        <asp:Label ID="fPath" runat="server" style="display: none;"></asp:Label>
+                        <asp:Label ID="fPath" runat="server" Style="display: none;"></asp:Label>
                     </div>
 
                     <div class="modal-footer">
@@ -105,14 +114,6 @@
                         <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Update" OnClick="btnUpdateCourseContent_Click" />
                     </div>
 
-<%--                    <%if (ViewState["contMsg"].ToString() != "")
-                        {
-                    %>
-                    <div class="alert alert-success" role="alert">
-                        <%=ViewState["contMsg"].ToString() %>
-                    </div>
-
-                    <%} %>--%>
                 </div>
 
             </div>
@@ -120,6 +121,10 @@
     </div>
 
     <script>
+
+        setTimeout(function () {
+            $('#myAlert').fadeOut('slow');
+        }, 1000); // 2 seconds
 
         function fillContentForm(contentId) {
             var imgName = "";
