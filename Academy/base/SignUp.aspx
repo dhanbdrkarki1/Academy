@@ -82,6 +82,10 @@
                                                 Already have an account? <a href="Login.aspx"
                                                     class="info">Login</a>
                                             </p>
+                                            <p class="small fw-bold mt-2 pt-1 mb-0">
+                                                Go back to home <a href="Index.aspx"
+                                                    class="info">Home</a>
+                                            </p>
 
                                         </div>
 

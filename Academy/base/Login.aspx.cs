@@ -24,50 +24,74 @@ namespace Academy
         {
             if (Page.IsValid)
             {
-
-                string redirectUrl = Request.QueryString["redirectUrl"];
-                string courseId = Request.QueryString["CourseId"];
+                // user entered credentials
                 string username, password;
+
                 username = Username.Text;
                 password = Password.Text;
 
-                Utils uObj = new Utils();
-                string userRole = uObj.LoginUser(username, password);
-                Session["username"] = username;
-                if (userRole == "Instructor")
-                {
+                // if user want to enroll course without logging in
+                string redirectUrl = Request.QueryString["redirectUrl"];
+                string courseId = Request.QueryString["CourseId"];
 
-                    Response.Redirect("../instructor/InstructorCourses.aspx");
-
-                }
-                else if (userRole == "Student")
+                if (!string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(username))
                 {
-                    if (!string.IsNullOrEmpty(redirectUrl))
+                    System.Diagnostics.Debug.WriteLine("login page");
+                    Utils uObj = new Utils();
+                    try
                     {
-                        int studentId = getStudentId();
-                        // The redirectUrl parameter is present, so redirect the user to the specified page.
-                        Response.Redirect(redirectUrl + "?CourseId=" + courseId + "&StuId=" + studentId);
-                    }
-                    else
-                    {
-                        Response.Redirect("../student/Student.aspx");
+                        string userRole = uObj.LoginUser(username, password);
+                        Session["username"] = username;
+                        if (userRole == "Instructor")
+                        {
 
+                            Response.Redirect("../instructor/InstructorCourses.aspx");
+
+                        }
+                        else if (userRole == "Student")
+                        {
+                            if (!string.IsNullOrEmpty(redirectUrl))
+                            {
+                                int studentId = getStudentId();
+                                // The redirectUrl parameter is present, so redirect the user to the specified page.
+                                Response.Redirect(redirectUrl + "?CourseId=" + courseId + "&StuId=" + studentId);
+                            }
+                            else
+                            {
+                                Response.Redirect("../student/Student.aspx");
+
+                            }
+                        }
+                        else if (userRole == "Admin")
+                        {
+                            Response.Redirect("../admin/Admin.aspx");
+                        }
+                        else
+                        {
+                            lblMsg.Text = "Username or password is incorrect.";
+                            lblMsg.CssClass = "text-danger";
+                            Session.Clear();
+                            System.Diagnostics.Debug.WriteLine(lblMsg.Text);
+                            //lblMsg.Text = "Username or password is incorrect.";
+
+                            ClearField();
+
+                        }
                     }
-                }
-                else if (userRole == "Admin")
-                {
-                    Response.Redirect("../admin/Admin.aspx");
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error: ", ex.Message);
+                    }
                 }
                 else
                 {
+                    System.Diagnostics.Debug.WriteLine("login page errorr....");
 
-                    lblMsg.CssClass = "text-danger";
-                    lblMsg.CssClass = "../student/Student.aspx";
-                    //lblMsg.Text = "Username or password is incorrect.";
-
-                    ClearField();
-
+                    lblMsg.Text = "Username or password is empty.";
                 }
+
+
+
             }
 
             void ClearField()
@@ -80,7 +104,7 @@ namespace Academy
         // get instructor id from db
         int getStudentId()
         {
-            int instructorId = -1;
+            string stuId = string.Empty;
 
             string username = "";
             if (Session["username"] != null)
@@ -88,20 +112,18 @@ namespace Academy
                 username = Session["username"].ToString();
             }
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            Utils uObj = new Utils();
+            string acQuery = "select AccountId from UserAccount where username=@id";
+            try
             {
-                SqlCommand command = new SqlCommand("select AccountId from UserAccount where username='" + username + "'", connection);
-                command.Parameters.AddWithValue("@username", username);
-
-                connection.Open();
-                SqlDataReader sdr = command.ExecuteReader();
-
-                if (sdr.Read())
-                {
-                    return instructorId = sdr.GetInt32(0);
-                }
+                stuId = uObj.getSpecificData("Username", acQuery, "AccountId");
             }
-            return 0;
+            catch
+            {
+                System.Diagnostics.Debug.WriteLine("Username not found...");
+            }
+            return Convert.ToInt32(stuId);
+
         }
     }
 }

@@ -28,11 +28,7 @@ namespace Academy
             {
                 retrieveContentData();
             }
-            //if(IsPostBack)
-            //{
-            //    string contentId = Request.Params["__EVENTARGUMENT"];
-            //    System.Diagnostics.Debug.WriteLine("cccccid..: " + contentId);
-            //}
+
         }
 
 
@@ -121,16 +117,16 @@ namespace Academy
 
         protected void btnUpdateCourseContent_Click(object sender, EventArgs e)
         {
-            var contid = Request.Cookies["contid"].Value;
+            string contid = Request.Cookies["contid"].Value.ToString();
             System.Diagnostics.Debug.WriteLine("all right..." + contid);
 
             string courseId = Request.QueryString["Cid"];
             System.Diagnostics.Debug.WriteLine("all right..." + courseId);
-            string query = "update CourseContent set ContTitle=@title, TextCont=@text, ImageCont=@img, FileCont=@file, ContentUrl=@url where Cid=@cid";
+            string query = "update CourseContent set ContTitle=@title, TextCont=@text, ImageCont=@img, FileCont=@file, ContentUrl=@url where CourseContId=@cid";
             Utils uObj = new Utils();
 
             SqlParameter cid = new SqlParameter("@cid", SqlDbType.Int);
-            cid.Value = Convert.ToInt32(courseId);
+            cid.Value = Convert.ToInt32(contid);
 
             SqlParameter title = new SqlParameter("@title", SqlDbType.Char);
             title.Value = txtContentTitle.Text;
@@ -179,7 +175,7 @@ namespace Academy
                 }
             }
 
-            System.Diagnostics.Debug.WriteLine("img: " + imgPath);
+            System.Diagnostics.Debug.WriteLine("here: " + imgPath);
 
             SqlParameter img = new SqlParameter("@img", SqlDbType.Char);
             img.Value = imgPath;
@@ -192,9 +188,13 @@ namespace Academy
 
             if (uObj.DbAction(query, parameters) != null)
             {
+                retrieveContentData();
                 ViewState["contMsg"] = "Content updated successfully.";
                 System.Diagnostics.Debug.WriteLine("yooooooooo" + courseId);
+                
             }
+            
+
 
 
         }

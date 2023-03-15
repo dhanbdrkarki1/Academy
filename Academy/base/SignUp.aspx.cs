@@ -24,25 +24,22 @@ namespace Academy
 
         protected void IsValidEmail(object source, ServerValidateEventArgs args)
         {
-            var email = args.Value.Trim();
-            {
-                var trimmedEmail = email.Trim();
+            var email = args.Value.Trim().ToLower();
 
-                if (trimmedEmail.EndsWith("."))
-                {
-                    args.IsValid = false;
-                }
-                try
-                {
-                    var addr = new System.Net.Mail.MailAddress(email);
-                    args.IsValid = addr.Address == trimmedEmail;
-                }
-                catch
-                {
-                    args.IsValid = false;
-                }
+            // Define the regex pattern for email validation
+            string pattern = @"^[a-zA-Z0-9_]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            Regex regex = new Regex(pattern);
+
+            if (!regex.IsMatch(email))
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
             }
         }
+
 
         protected void Validate_Password(object source, ServerValidateEventArgs args)
         {
@@ -55,10 +52,12 @@ namespace Academy
                 var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
                 var isValidated = hasNumber.IsMatch(password) && hasUpperChar.IsMatch(password) && hasSymbols.IsMatch(password);
 
-                if (!hasMinimum8Chars.IsMatch(password)){
+                if (!hasMinimum8Chars.IsMatch(password))
+                {
                     args.IsValid = false;
                 }
-                else if(!isValidated){
+                else if (!isValidated)
+                {
                     args.IsValid = false;
                 }
                 else
@@ -76,27 +75,44 @@ namespace Academy
         {
             if (Page.IsValid)
             {
-                String query = "insert into UserAccount(FullName,Email,Username,AccountType,Password) values('" + FullName.Text + "','" + Email.Text + "','" + Username.Text + "','" + ddAccountType.SelectedValue + "','" + ConfirmPassword.Text + "')";
-                
-                SqlConnection con = new SqlConnection(connectionString);
+                String query = "insert into UserAccount(FullName,Email,Username,AccountType,Password) values(@name, @email, @uname, @acType, @password)";
+
+                //queries params
+                SqlParameter name = new SqlParameter("@name", SqlDbType.Char);
+                name.Value = FullName.Text;
+
+                SqlParameter uname = new SqlParameter("@uname", SqlDbType.Char);
+                uname.Value = Username.Text;
+
+
+                SqlParameter email = new SqlParameter("@email", SqlDbType.Char);
+                email.Value = Email.Text;
+
+                SqlParameter acType = new SqlParameter("@acType", SqlDbType.Char);
+                acType.Value = ddAccountType.SelectedValue;
+
+                SqlParameter password = new SqlParameter("@password", SqlDbType.Char);
+                password.Value = ConfirmPassword.Text;
+
+                SqlParameter[] parameters = { name, email, uname, acType, password };
+                Utils uObj = new Utils();
+
                 try
                 {
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandText = query;
-                    cmd.Connection = con;
-                    cmd.ExecuteNonQuery();
-                    lblMsg.CssClass = "text-success";
-                    lblMsg.Text = "Your account has been created successfully.";
-                    ClearField();
+                    // insert data into db
+                    if (uObj.DbAction(query, parameters) != null)
+                    {
+                        lblMsg.CssClass = "text-success";
+                        lblMsg.Text = "Your account has been created successfully.";
+                        // clearing fields
+                        uObj.ClearField(FullName, Username, Email, Password, ConfirmPassword);
+
+                    }
                 }
                 catch (Exception ex)
                 {
                     Response.Write(ex.Message);
                 }
-
-
-
             }
             else
             {
@@ -105,10 +121,5 @@ namespace Academy
             }
         }
 
-
-        void ClearField()
-        {
-            FullName.Text = Username.Text = Email.Text = Password.Text = ConfirmPassword.Text = "";
-        }
     }
 }
