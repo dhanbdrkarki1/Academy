@@ -22,6 +22,7 @@
 
                 <div class="row" data-aos="zoom-in" data-aos-delay="100">
                     <%
+
                         List<object[]> contentData = (List<object[]>)ViewState["MyCoursesData"];
                         foreach (object[] data in contentData)
                         {

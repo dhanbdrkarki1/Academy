@@ -76,6 +76,7 @@ namespace Academy
                     object[] data = new object[7];
                     data[0] = sdr1["Courseid"];
                     data[1] = sdr1["Title"];
+
                     data[2] = uObj.getSpecificData(sdr1["Category"].ToString(), categoryQuery, "Category");
                     data[3] = sdr1["OverView"];
                     data[4] = sdr1["Rate"];
@@ -84,6 +85,7 @@ namespace Academy
                     idList.Add(data[0].ToString());
 
                     dataList.Add(data);
+
                 }
                 sdr1.Close();
                 ViewState["PopularCourseData"] = dataList;

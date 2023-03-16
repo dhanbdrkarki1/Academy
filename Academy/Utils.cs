@@ -103,7 +103,7 @@ namespace Academy
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("specific data method " + ex.Message);
             }
             return null;
         }
@@ -129,7 +129,7 @@ namespace Academy
                     }
                     catch (SqlException ex)
                     {
-                        System.Diagnostics.Debug.WriteLine(ex.Message);
+                        System.Diagnostics.Debug.WriteLine(ex.Message + "parameters failed");
                     }
                 }
 
@@ -141,12 +141,12 @@ namespace Academy
                 }
                 catch (SqlException ex)
                 {
-                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    System.Diagnostics.Debug.WriteLine(ex.Message + "utils execute reader failed");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message + "connection failed");
             }
             return null;
         }

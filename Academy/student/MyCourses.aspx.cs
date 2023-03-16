@@ -23,10 +23,12 @@ namespace Academy
         {
             if (!IsPostBack)
             {
+                System.Diagnostics.Debug.WriteLine("my courses beginning....");
                 retrieveData();
             }
             if (IsPostBack)
             {
+                System.Diagnostics.Debug.WriteLine("redirection beginning....");
                 redirectToCourseContent();
 
             }
@@ -99,19 +101,16 @@ namespace Academy
 
         void retrieveCourseContentData(string userCourseId)
         {
-            int courseId = Convert.ToInt32(userCourseId);
             string userQuery = "select * from UserAccount where Username=@id";
-            string courseContentQuery = "select * from CourseContent where  Cid=@courseContentId";
 
+            string courseContentQuery = "select * from CourseContent where  CId=@CId";
 
+            System.Diagnostics.Debug.WriteLine("all retrieveCourseContentData................");
             Utils uObj = new Utils();
             string username = Session["username"].ToString();
-            System.Diagnostics.Debug.WriteLine("heyyyyyy....", username);
             string stuId = uObj.getSpecificData(username, userQuery, "AccountId");
-            System.Diagnostics.Debug.WriteLine("heyyyyyy....", stuId);
-
-            SqlParameter cccid = new SqlParameter("@courseContentId", SqlDbType.Int);
-            cccid.Value = Convert.ToInt32(stuId);
+            SqlParameter cccid = new SqlParameter("@CId", SqlDbType.Int);
+            cccid.Value = Convert.ToInt32(userCourseId);
 
             SqlParameter[] parameters = { cccid };
 
@@ -125,24 +124,20 @@ namespace Academy
                 while (sdr.Read())
                 {
                     object[] data = new object[8];
-                    data[0] = sdr["CourseContentId"];
-                    data[1] = sdr["Cid"];
+                    data[0] = sdr["CourseContId"];
+                    data[1] = sdr["CId"];
                     data[2] = sdr["ContTitle"];
-                    data[3] = sdr["TextContent"];
-                    data[4] = sdr["FileContent"];
+                    data[3] = sdr["TextCont"];
+                    data[4] = sdr["ImageCont"];
+                    data[5] = sdr["FileCont"];
                     data[6] = sdr["ContentUrl"];
                     dataList.Add(data);
                 }
+
+                System.Diagnostics.Debug.WriteLine("just checking completed....: ");
                 sdr.Close();
                 ViewState["MyCoursesContentData"] = dataList;
-                if (ViewState["MyCoursesContentData"] != null)
-                {
-                    System.Diagnostics.Debug.WriteLine("i'm hereeeee babe....");
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("oh.. no please bye bye....");
-                }
+                Session["MyCoursesContentData"] = dataList;
 
                 System.Diagnostics.Debug.WriteLine("Retreiving content completed....");
             }

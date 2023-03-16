@@ -27,11 +27,32 @@
 
 
     <div class="container">
+
+        <%
+            List<object[]> contentData = (List<object[]>)Session["MyCoursesContentData"];
+            if (contentData == null || contentData.Count == 0)
+            {
+        %>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h3 class="mt-2">No content added yet.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%
+            }
+            else
+            { %>
+
         <div class="row">
             <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
                     <%
-                        List<object[]> contentData = (List<object[]>)ViewState["MyCoursesContentData"];
                         int index = 0;
                         foreach (object[] data in contentData)
                         {
@@ -47,7 +68,7 @@
                         }
                     %>
                 </div>
-            </div>
+    </div>
             <div class="col-9">
                 <div class="tab-content" id="v-pills-tabContent">
                     <%
@@ -113,12 +134,14 @@
                         %>
                     </div>
                     <%
-                            index++;
+                                index++;
+                            }
                         }
+
                     %>
                 </div>
             </div>
-        </div>
+    </div>
     </div>
 
     <%--    <%
