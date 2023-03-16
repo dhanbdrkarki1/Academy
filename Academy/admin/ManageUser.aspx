@@ -56,7 +56,7 @@
                             <h2><b>User Accounts</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" data-target="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add User</span></a>
+                            <a href="#addUserModal" data-target="#addUserModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add User</span></a>
                         </div>
                     </div>
                 </div>
@@ -68,6 +68,9 @@
 
 
                 <asp:GridView ID="gvManageUserAccount" runat="server" AutoGenerateColumns="false" DataKeyNames="AccountId" ShowHeaderWhenEmpty="true"
+                    OnRowEditing="gvManageUserAccount_RowEditing" OnRowCancelingEdit="gvManageUserAccount_RowCancelingEdit" OnRowUpdating="gvManageUserAccount_RowUpdating"
+                    OnRowDeleting="gvManageUserAccount_RowDeleting"
+                    OnRowDataBound="gvManageUserAccount_RowDataBound"
                     class="table table-striped table-hover">
 
                     <Columns>
@@ -104,14 +107,25 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
 
+
                         <asp:TemplateField HeaderText="AccountType">
+                            <ItemTemplate>
+                                <asp:Label Text='<%# Eval("AccountType") %>' runat="server" />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="ddlAccountType" AppendDataBoundItems="true" runat="server"></asp:DropDownList>
+
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <%--                        <asp:TemplateField HeaderText="AccountType">
                             <ItemTemplate>
                                 <asp:Label Text='<%# Eval("AccountType") %>' runat="server" />
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="txtAccountType" Text='<%# Eval("AccountType") %>' runat="server" />
                             </EditItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
 
                         <asp:TemplateField HeaderText="Password">
                             <ItemTemplate>
@@ -139,13 +153,13 @@
 
     </main>
 
-    <%--    <!-- courses Modal -->
-    <div id="addEmployeeModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <!-- user Modal -->
+    <div id="addUserModal" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Course</h5>
+                    <h5 class="modal-title">Add User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -153,35 +167,59 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <asp:Label ID="lblCourseTitle" class="col-form-label" runat="server" Text="Course Title"></asp:Label>
-                            <asp:TextBox ID="txtCourseTitle" class="form-control" runat="server"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ControlToValidate="txtCourseTitle" ValidationGroup="ba"></asp:RequiredFieldValidator>
+                            <asp:Label ID="lblFullName" class="col-form-label" runat="server" Text="Full Name"></asp:Label>
+                            <asp:TextBox ID="txtFullName" class="form-control" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ControlToValidate="txtFullName" ValidationGroup="ba"></asp:RequiredFieldValidator>
                         </div>
+
                         <div class="form-group">
-                            <asp:Label ID="lblCategory" class="col-form-label" runat="server" Text="Category"></asp:Label>
-                            <asp:DropDownList ID="ddCategory" class="form-select" runat="server">
+                            <asp:Label ID="lblEmail" class="col-form-label" runat="server" Text="Email"></asp:Label>
+                            <asp:TextBox ID="txtEmail" class="form-control" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ControlToValidate="txtEmail" ValidationGroup="ba"></asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Invalid Email Address" OnServerValidate="IsValidEmail" ControlToValidate="txtEmail" Display="Dynamic" ValidationGroup="ba" ValidateEmptyText="true" ForeColor="#CC3300"></asp:CustomValidator>
+                        </div>
+
+                        <div class="form-group">
+                            <asp:Label ID="lblUsername" class="col-form-label" runat="server" Text="Username"></asp:Label>
+                            <asp:TextBox ID="txtUsername" class="form-control" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ControlToValidate="txtUsername" ValidationGroup="ba"></asp:RequiredFieldValidator>
+                        </div>
+
+                        <div class="form-group">
+                            <asp:Label ID="lblAccountType" class="col-form-label" runat="server" Text="Acount Type"></asp:Label>
+                            <asp:DropDownList ID="ddUserAccountType" class="form-select" runat="server">
                             </asp:DropDownList>
 
                         </div>
+
                         <div class="form-group">
-                            <asp:Label ID="lblOverView" class="col-form-label" runat="server" Text="Overview"></asp:Label>
-                            <asp:TextBox ID="TextBox1" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ForeColor="#CC3300" ErrorMessage="This field is required." Display="Dynamic" ValidationGroup="ba" ControlToValidate="txtOverView"></asp:RequiredFieldValidator>
+                            <asp:Label ID="lblPassword" runat="server" class="col-form-label" Text="Password"></asp:Label>
+                            <asp:TextBox ID="txtPassword" class="form-control" runat="server" TextMode="Password"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="This field is required." ValidationGroup="ba" Display="Dynamic" ControlToValidate="txtPassword" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="Password must contain 8 or more characters." OnServerValidate="Validate_Password" ControlToValidate="txtPassword" ValidationGroup="vs" Display="Dynamic" ForeColor="#CC3300"></asp:CustomValidator>
                         </div>
+
+
                         <div class="form-group">
-                            <asp:Label ID="lblRate" class="col-form-label" runat="server" Text="Rate"></asp:Label>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ForeColor="#CC3300" ErrorMessage="This Field is required." ControlToValidate="txtRate" ValidationGroup="ba" Display="Dynamic"></asp:RequiredFieldValidator>
-                            <asp:TextBox ID="TextBox2" class="form-control" runat="server"></asp:TextBox>
+                            <asp:Label ID="lblConfirmPassword" runat="server" class="col-form-label" Text="Confirm Password"></asp:Label>
+                            <asp:TextBox ID="txtConfirmPassword" class="form-control" runat="server" TextMode="Password"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ValidationGroup="ba" Display="Dynamic" ControlToValidate="txtConfirmPassword" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="CustomValidator3" runat="server" ErrorMessage="Password must contain 8 or more characters." OnServerValidate="Validate_Password" ControlToValidate="txtConfirmPassword" ValidationGroup="ba" Display="Dynamic" ForeColor="#CC3300"></asp:CustomValidator>
+                            <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Password doesn't match." ControlToValidate="txtConfirmPassword" Display="Dynamic" ControlToCompare="txtPassword" ForeColor="#CC3300"></asp:CompareValidator>
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <asp:Button ID="btnCancel" class="btn btn-default" data-dismiss="modal" runat="server" Text="Cancel" />
-                    <asp:Button ID="btnAdd" class="btn btn-success" runat="server" Text="Add" ValidationGroup="ba" OnClick="btnAddCourse" />
+                    <asp:Button ID="btnAdd" class="btn btn-success" runat="server" Text="Add" ValidationGroup="ba" OnClick="btnAddUser_Click" />
+                    <br />
+                    <div class="small fw-bold mt-2 pt-1 mb-0">
+                        <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
+                    </div>
                 </div>
 
             </div>
         </div>
-    </div>--%>
+    </div>
 </asp:Content>

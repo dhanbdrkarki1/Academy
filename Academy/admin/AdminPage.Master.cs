@@ -17,7 +17,8 @@ namespace Academy
         protected void btnSignOut_Click(object sender, EventArgs e)
         {
             Session.Remove("username");
-            Response.Redirect("~/Index.aspx");
+            Response.Redirect("../base/Index.aspx");
         }
+
     }
 }

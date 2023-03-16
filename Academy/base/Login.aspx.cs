@@ -64,7 +64,7 @@ namespace Academy
                         }
                         else if (userRole == "Admin")
                         {
-                            Response.Redirect("../admin/Admin.aspx");
+                            Response.Redirect("../admin/ManageUser.aspx");
                         }
                         else
                         {

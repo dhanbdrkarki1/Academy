@@ -71,10 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="academy-cmd.sql" />
-    <Content Include="admin\Profile.aspx" />
-    <Content Include="admin\ViewEnrollment.aspx" />
+    <Content Include="admin\AdminProfile.aspx" />
     <Content Include="admin\ManageUser.aspx" />
-    <Content Include="admin\AllCourses.aspx" />
     <Content Include="App_Data\AcademyDB.mdf" />
     <Content Include="App_Data\AcademyDB_log.ldf">
       <DependentUpon>AcademyDB.mdf</DependentUpon>
@@ -165,7 +163,6 @@
     <Content Include="instructor\InstructorCourses.aspx" />
     <Content Include="instructor\ViewEnrollment.aspx" />
     <Content Include="student\MyCourses.aspx" />
-    <Content Include="admin\Admin.aspx" />
     <Content Include="instructor\InstructorProfile.aspx" />
     <Content Include="instructor\InstructorCourseContentUpdate.aspx" />
   </ItemGroup>
@@ -177,19 +174,12 @@
     <Compile Include="admin\AdminPage.Master.designer.cs">
       <DependentUpon>AdminPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="admin\Profile.aspx.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
+    <Compile Include="admin\AdminProfile.aspx.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\Profile.aspx.designer.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\ViewEnrollment.aspx.cs">
-      <DependentUpon>ViewEnrollment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\ViewEnrollment.aspx.designer.cs">
-      <DependentUpon>ViewEnrollment.aspx</DependentUpon>
+    <Compile Include="admin\AdminProfile.aspx.designer.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\ManageUser.aspx.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
@@ -197,13 +187,6 @@
     </Compile>
     <Compile Include="admin\ManageUser.aspx.designer.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\AllCourses.aspx.cs">
-      <DependentUpon>AllCourses.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\AllCourses.aspx.designer.cs">
-      <DependentUpon>AllCourses.aspx</DependentUpon>
     </Compile>
     <Compile Include="base\Base.Master.cs">
       <DependentUpon>Base.Master</DependentUpon>
@@ -334,13 +317,6 @@
     <Compile Include="student\MyCourses.aspx.designer.cs">
       <DependentUpon>MyCourses.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="instructor\InstructorProfile.aspx.cs">
       <DependentUpon>InstructorProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -355,6 +331,7 @@
     <Compile Include="instructor\InstructorCourseContentUpdate.aspx.designer.cs">
       <DependentUpon>InstructorCourseContentUpdate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormCustomValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\vendor\bootstrap-icons\bootstrap-icons.json" />
