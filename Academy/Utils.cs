@@ -65,7 +65,7 @@ namespace Academy
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Something went wrong.");
+                System.Diagnostics.Debug.WriteLine("Something went wrong in login");
             }
             return null;
         }
