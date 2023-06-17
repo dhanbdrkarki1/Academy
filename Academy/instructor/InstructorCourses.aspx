@@ -64,12 +64,6 @@
                 <asp:GridView ID="gvManageCourse" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" ShowHeaderWhenEmpty="true"
                     OnRowEditing="gvManageCourse_RowEditing" OnRowCancelingEdit="gvManageCourse_RowCancelingEdit" OnRowUpdating="gvManageCourse_RowUpdating"
                     OnRowDeleting="gvManageCourse_RowDeleting" OnRowDataBound="gvManageCourse_RowDataBound" class="table table-striped table-hover">
-
-
-                    <%--                <asp:GridView ID="gvManageCourse" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId"
-                    ShowHeaderWhenEmpty="true" OnRowEditing="gvManageCourse_RowEditing" OnRowCancelingEdit="gvManageCourse_RowCancelingEdit"
-                    OnRowUpdating="gvManageCourse_RowUpdating" OnRowDeleting="gvManageCourse_RowDeleting" OnRowDataBound="gvManageCourse_RowDataBound" class="table table-striped table-hover">--%>
-
                     <Columns>
                         <asp:TemplateField HeaderText="Course ID">
                             <ItemTemplate>

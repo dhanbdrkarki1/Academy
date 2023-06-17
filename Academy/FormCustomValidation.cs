@@ -14,7 +14,7 @@ namespace Academy
             var trimmedEmail = email.Trim().ToLower();
 
             // Define the regex pattern for email validation
-            string pattern = @"^[a-zA-Z0-9_]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            string pattern = @"^[a-zA-Z0-9_.]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             Regex regex = new Regex(pattern);
 
             if (!regex.IsMatch(trimmedEmail))

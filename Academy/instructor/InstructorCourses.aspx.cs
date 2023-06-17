@@ -138,6 +138,16 @@ namespace Academy
                 sda.SelectCommand.Parameters.AddWithValue("@iid", instructorId);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
+
+                // Format the CreatedAt column
+                dt.Columns["CreatedAt"].DateTimeMode = DataSetDateTime.Unspecified;
+                dt.Columns["CreatedAt"].ReadOnly = false;
+                foreach (DataRow row in dt.Rows)
+                {
+                    DateTime createdAt = (DateTime)row["CreatedAt"];
+                    row["CreatedAt"] = createdAt.ToString("dd-MMM-yy");
+                }
+
                 if (dt.Rows.Count > 0)
                 {
                     gvManageCourse.DataSource = dt;
@@ -162,6 +172,46 @@ namespace Academy
                 Console.WriteLine("Something went wrong.");
             }
         }
+
+
+
+        //void populateGridView()
+        //{
+        //    string instructorId = getInstructorId();
+        //    string query = "select c.CourseId, c.Title, cc.Category, c.OverView, c.Rate, c.CreatedAt from Courses c join CourseCategory cc on c.Category = cc.CourseCatId where c.InstructorId='" + instructorId + "'";
+        //    SqlConnection con = new SqlConnection(connectionString);
+
+        //    try
+        //    {
+        //        con.Open();
+        //        SqlDataAdapter sda = new SqlDataAdapter(query, con);
+        //        sda.SelectCommand.Parameters.AddWithValue("@iid", instructorId);
+        //        DataTable dt = new DataTable();
+        //        sda.Fill(dt);
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            gvManageCourse.DataSource = dt;
+        //            gvManageCourse.DataBind();
+        //        }
+        //        else
+        //        {
+        //            dt.Rows.Add(dt.NewRow());
+        //            gvManageCourse.DataSource = dt;
+        //            gvManageCourse.DataBind();
+        //            gvManageCourse.Rows[0].Cells.Clear();
+        //            gvManageCourse.Rows[0].Cells.Add(new TableCell());
+        //            gvManageCourse.Rows[0].Cells[0].ColumnSpan = dt.Columns.Count;
+        //            gvManageCourse.Rows[0].Cells[0].Text = "No data found...";
+        //            gvManageCourse.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        System.Diagnostics.Debug.WriteLine(ex.Message);
+
+        //        Console.WriteLine("Something went wrong.");
+        //    }
+        //}
 
 
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="StudentPage.Master" AutoEventWireup="true" CodeBehind="AvailableCourses.aspx.cs" Inherits="Academy.student.WebForm1" %>
+﻿<%@ Page Title="Available Courses" Language="C#" MasterPageFile="StudentPage.Master" AutoEventWireup="true" CodeBehind="AvailableCourses.aspx.cs" Inherits="Academy.student.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">

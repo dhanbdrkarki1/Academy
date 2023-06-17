@@ -22,48 +22,27 @@ namespace Academy
         }
 
 
+        // validating email
         protected void IsValidEmail(object source, ServerValidateEventArgs args)
         {
-            var email = args.Value.Trim().ToLower();
+            try
+            {
+                args.IsValid = FormCustomValidation.IsValidEmail(args.Value.Trim());
 
-            // Define the regex pattern for email validation
-            string pattern = @"^[a-zA-Z0-9_]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-            Regex regex = new Regex(pattern);
-
-            if (!regex.IsMatch(email))
+            }
+            catch (Exception)
             {
                 args.IsValid = false;
             }
-            else
-            {
-                args.IsValid = true;
-            }
         }
 
-
+        //validating password
         protected void Validate_Password(object source, ServerValidateEventArgs args)
         {
             try
             {
                 var password = args.Value.Trim();
-                var hasNumber = new Regex(@"[0-9]+");
-                var hasUpperChar = new Regex(@"[A-Z]+");
-                var hasMinimum8Chars = new Regex(@".{8,}");
-                var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
-                var isValidated = hasNumber.IsMatch(password) && hasUpperChar.IsMatch(password) && hasSymbols.IsMatch(password);
-
-                if (!hasMinimum8Chars.IsMatch(password))
-                {
-                    args.IsValid = false;
-                }
-                else if (!isValidated)
-                {
-                    args.IsValid = false;
-                }
-                else
-                {
-                    args.IsValid = true;
-                }
+                args.IsValid = FormCustomValidation.Validate_Password(password);
             }
             catch (Exception)
             {

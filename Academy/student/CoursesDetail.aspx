@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/student/StudentPage.Master" AutoEventWireup="true" CodeBehind="CoursesDetail.aspx.cs" Inherits="Academy.student.WebForm3" %>
+﻿<%@ Page Title="Course Detail" Language="C#" MasterPageFile="~/student/StudentPage.Master" AutoEventWireup="true" CodeBehind="CoursesDetail.aspx.cs" Inherits="Academy.student.WebForm3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
@@ -96,7 +96,7 @@
                             if (contImage != null)
                             {
                         %>
-                        <img src="<%= contImage %>" />
+                        <img width="900" height="300"  src="<%= contImage %>" />
                         <%
                             }
                             else
@@ -109,8 +109,8 @@
 
 
                         <%--video url--%>
-                        <%
-                            if (contImage != null)
+<%--                        <%
+                            if (contFile != null)
                             {
                         %>
                         <h5>Tutorial Video</h5>
@@ -119,7 +119,7 @@
                         </div>
                         <%
                             }
-                        %>
+                        %>--%>
 
 
                         <%--resource File--%>
@@ -127,7 +127,8 @@
                             if (contFile != null)
                             {
                         %>
-                        <a class="btn btn-primary" href="<%= contFile %>">Resouce File</a>
+                        <br/><br />
+                        <a class="btn btn-primary" target="_blank" href="<%= contFile %>">Resouce File</a>
 
                         <%
                             }
